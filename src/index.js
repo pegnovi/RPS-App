@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import io from 'socket.io-client';
+import { connect } from './tools/webSocket';
 
-const socket = io('http://localhost:8090');
+const socket = connect();
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
