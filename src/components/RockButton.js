@@ -2,19 +2,19 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class RockButton extends Component {
-	onClick(){
-		console.log('rock clicked');
-	}
 
 	render(){
 		return (
-			<input type='button' name='rock' value='rock' onClick={this.onClick.bind(this)} />
+			<input
+				type='button'
+				name='rock'
+				onClick={() => this.props.onRockClick()}
+			/>
 		);
 	}
 }
 
 function mapStateToProps(state){
-	console.log('map')
 	return {
 		handsign: state.handsign
 	}

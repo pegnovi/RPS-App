@@ -3,7 +3,7 @@ export default function(state = null, action) {
 	switch(action.type){
 		case 'ROCK_SIGN_CLICKED':
 			// return {
-			// 	handsign: 'rock'
+			// 	handsign: state
 			// }
 			console.log(state)
 			console.log('-----------')
