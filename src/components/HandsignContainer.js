@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import RockButton from './RockButton';
 import ScissorButton from './ScissorButton';
+import HandsignButton from './HandsignButton';
 
-import {playRockHand, playScissorHand} from '../actions/hangsignActions';
+import {playRockHand, playScissorHand, playHandSign} from '../actions/hangsignActions';
 
 class HandsignContainer extends Component {
 
@@ -13,6 +14,11 @@ class HandsignContainer extends Component {
 			<div>
 				<RockButton onRockClick={() => this.props.playRockHand('rock')} />
 				<ScissorButton onScissorClick={() => this.props.playScissorHand('scissor')} />
+				<HandsignButton
+					buttonName='paper'
+					buttonValue='paper'
+					onHandsignClick={() => this.props.playHandSign('paper')}
+				/>
 			</div>
 		);
 	}
@@ -27,10 +33,8 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators({
-		playRockHand: playRockHand,
-		playScissorHand: playScissorHand
-	}, dispatch);
+	// using ES6 object literal, equivalent to { playRockHand: playRockHand, ... }
+	return bindActionCreators({ playRockHand, playScissorHand, playHandSign }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HandsignContainer);

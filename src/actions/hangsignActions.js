@@ -11,5 +11,13 @@ export const playScissorHand = (state) => {
 		payload: state
 	};
 }
+
+export const playHandSign = (state) => {
+	const type = state.toUpperCase() + '_SIGN_CLICKED';
+	return {
+		type: type,
+		payload: state
+	};
+}
 //TODO implement scissor action
 //TODO implement paper action
