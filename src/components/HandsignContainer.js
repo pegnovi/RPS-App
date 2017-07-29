@@ -19,6 +19,11 @@ class HandsignContainer extends Component {
 					buttonValue='paper'
 					onHandsignClick={() => this.props.playHandSign('paper')}
 				/>
+				<HandsignButton
+					buttonName='rocketlauncher'
+					buttonValue='rocketlauncher'
+					onHandsignClick={() => this.props.playHandSign('rocketlauncher')}
+				/>
 			</div>
 		);
 	}

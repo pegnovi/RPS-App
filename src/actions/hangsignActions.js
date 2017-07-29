@@ -12,6 +12,7 @@ export const playScissorHand = (state) => {
 	};
 }
 
+// is this bad practice? can handle unlimited number of handsigns
 export const playHandSign = (state) => {
 	const type = state.toUpperCase() + '_SIGN_CLICKED';
 	return {
