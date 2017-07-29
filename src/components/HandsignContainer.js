@@ -36,7 +36,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-	// using ES6 object literal, equivalent to { playRockHand: playRockHand, ... }
+	// using ES6 property value shorthand, equivalent to { playRockHand: playRockHand, ... }
 	return bindActionCreators({ playRockHand, playScissorHand, playHandSign }, dispatch);
 }
 
