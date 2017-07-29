@@ -1,16 +1,13 @@
 // takes in actions, reduces them to functions
 export default function(state = null, action) {
 	switch(action.type){
+		case 'SCISSOR_SIGN_CLICKED':
 		case 'ROCK_SIGN_CLICKED':
-			// return {
-			// 	handsign: state
-			// }
-			console.log(state)
-			console.log('-----------')
-			console.log(action)
+			console.log('action', action);
 			return action.payload;
 		default:
 			break;
 	}
+	console.log('state', state);
 	return state;
 }

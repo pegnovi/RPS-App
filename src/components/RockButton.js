@@ -8,6 +8,7 @@ class RockButton extends Component {
 			<input
 				type='button'
 				name='rock'
+				value='rock'
 				onClick={() => this.props.onRockClick()}
 			/>
 		);
