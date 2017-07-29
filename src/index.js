@@ -9,7 +9,7 @@ import {createStore} from 'redux';
 import allReducers from './reducers';
 
 const store = createStore(allReducers);
-console.log(store.getState());
+console.log('INITIAL APP STATE:', store.getState());
 
 registerServiceWorker();
 

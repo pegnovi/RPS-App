@@ -7,8 +7,8 @@ class HandsignButton extends Component {
 		return (
 			<input
 				type='button'
-				name={this.props.buttonName}
-				value={this.props.buttonValue}
+				name={this.props.handSignType}
+				value={this.props.handSignType}
 				onClick={() => this.props.onHandsignClick()}
 			/>
 		);

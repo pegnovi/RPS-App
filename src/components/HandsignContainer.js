@@ -15,13 +15,11 @@ class HandsignContainer extends Component {
 				<RockButton onRockClick={() => this.props.playRockHand('rock')} />
 				<ScissorButton onScissorClick={() => this.props.playScissorHand('scissor')} />
 				<HandsignButton
-					buttonName='paper'
-					buttonValue='paper'
+					handSignType='paper'
 					onHandsignClick={() => this.props.playHandSign('paper')}
 				/>
 				<HandsignButton
-					buttonName='rocketlauncher'
-					buttonValue='rocketlauncher'
+					handSignType='rocketlauncher'
 					onHandsignClick={() => this.props.playHandSign('rocketlauncher')}
 				/>
 			</div>
