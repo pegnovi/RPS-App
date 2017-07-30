@@ -25,11 +25,9 @@ class HandsignContainer extends Component {
 			</div>
 		);
 	}
-
 }
 
 function mapStateToProps(state){
-	console.log('state', state);
 	return {
 		handsign: state.handsign
 	}
