@@ -6,7 +6,7 @@ const app = require('./app');
 
 const PORT = 9000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.log(`App listening on port ${PORT}!`);
 });
 
@@ -36,7 +36,8 @@ function startGame(io, socket) {
 
 }
 
-const io = new Server().attach(8090);
+//const io = new Server().attach(8090);
+const io = require('socket.io')(server);
 io.on('connection', function(socket) {
 	console.log('client connected!');
 
