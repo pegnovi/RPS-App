@@ -1,0 +1,22 @@
+# state model
+
+```
+{
+	gameState: <string>,
+	players: {
+			opponent: {
+				choice/handsign: <string>
+			},
+			me: {
+				choice/handsign: <string>
+			}
+
+	},
+	playerStatus: {
+		wins: <number>,
+		losses: <number>
+	}
+}
+```
+
+#### Components will render conditionally based on game.state
