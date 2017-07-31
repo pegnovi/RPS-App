@@ -1,10 +1,8 @@
 // takes in actions, reduces them to functions
+// // do i really need 3 seperate actions here?
 export default function(state = null, action) {
 	switch(action.type){
-		case 'ROCKETLAUNCHER_SIGN_CLICKED':
-		case 'PAPER_SIGN_CLICKED':
-		case 'SCISSOR_SIGN_CLICKED':
-		case 'ROCK_SIGN_CLICKED':
+		case 'HANDSIGN_SELECTED':
 			return action.payload;
 		default:
 			break;

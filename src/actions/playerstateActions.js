@@ -1,4 +1,4 @@
-// would socket connection go here?
+// game state action creators
 export const startGame = () => {
 	return {
 		type: 'PLAYER_START_GAME',

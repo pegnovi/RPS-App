@@ -9,7 +9,11 @@ class GameContainer extends Component {
 		return (
 			<div>
 				<p>Testing</p>
-				<input type="button" name="play" value="play" onClick={() => this.props.startGame('start')} />
+				<input type="button"
+					name="play"
+					value="play"
+					onClick={() => this.props.startGame('start')}
+				/>
 			</div>
 		);
 	}

@@ -1,27 +1,29 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
-import RockButton from './RockButton';
-import ScissorButton from './ScissorButton';
+import { bindActionCreators } from 'redux';
 import HandsignButton from './HandsignButton';
 
-import {playRockHand, playScissorHand, playHandSign} from '../actions/hangsignActions';
+import { playHandSign } from '../actions/hangsignActions';
+
+const handsigns = ['rock', 'paper', 'scissors', 'rocketlauncher'];
+let count = 0;
 
 class HandsignContainer extends Component {
-
 	render(){
+		// setup elements
+		const elements = handsigns.map((handsign)=>{
+			return (
+				<HandsignButton
+					key={count++}
+					handSignType={handsign}
+					onHandsignClick={() => this.props.playHandSign(handsign)}
+				/>
+			);
+		});
+
 		return (
 			<div>
-				<RockButton onRockClick={() => this.props.playRockHand('rock')} />
-				<ScissorButton onScissorClick={() => this.props.playScissorHand('scissor')} />
-				<HandsignButton
-					handSignType='paper'
-					onHandsignClick={() => this.props.playHandSign('paper')}
-				/>
-				<HandsignButton
-					handSignType='rocketlauncher'
-					onHandsignClick={() => this.props.playHandSign('rocketlauncher')}
-				/>
+				{elements}
 			</div>
 		);
 	}
@@ -34,8 +36,8 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-	// using ES6 property value shorthand, equivalent to { playRockHand: playRockHand, ... }
-	return bindActionCreators({ playRockHand, playScissorHand, playHandSign }, dispatch);
+	// using ES6 property value shorthand, equivalent to { playHandSign: playHandSign, ... }
+	return bindActionCreators({ playHandSign }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HandsignContainer);
