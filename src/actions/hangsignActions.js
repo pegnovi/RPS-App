@@ -1,26 +1,8 @@
-export const playRockHand = (state) => {
-	return {
-		type: 'ROCK_SIGN_CLICKED',
-		payload: state
-	};
-}
-
-export const playScissorHand = (state) => {
-	return {
-		type: 'SCISSOR_SIGN_CLICKED',
-		payload: state
-	};
-}
-
-// is this bad practice? can handle any handsign type
+// action creator for all handsign types
 export const playHandSign = (state) => {
-	const type = state.toUpperCase() + '_SIGN_CLICKED';
+	const type = 'HANDSIGN_SELECTED';
 	return {
 		type: type,
 		payload: state
 	};
 }
-
-//below: unnecessary?
-//TODO implement scissor action
-//TODO implement paper action
