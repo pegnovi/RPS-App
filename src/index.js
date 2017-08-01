@@ -8,18 +8,48 @@ import {createStore} from 'redux';
 
 import allReducers from './reducers';
 
+import { connect } from './tools/webSocket';
+
 const store = createStore(
 	allReducers,
 	/* FOR USE WITH REDUX-DEV-TOOLS https://github.com/zalmoxisus/redux-devtools-extension#usage */
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-console.log('INITIAL APP STATE:', store.getState());
+//console.log('INITIAL APP STATE:', store.getState());
 
 
-import { connect } from './tools/webSocket';
-const socket = connect();
+
+// const socket = connect();
 
 // add socket event handlers here
+// var choice = '';
+// $('#joinGame').click(function() {
+// 	socket.emit('join game');
+// });
+// $('#ready').click(function() {
+// 	socket.emit('ready');
+// });
+// socket.on('Room Complete', function() {
+// 	console.log('Room Complete');
+// 	showRPS();
+// });
+// socket.on('Start Game', function() {
+// 	console.log('GAME HAS STARTED!!!')
+// });
+// socket.on('Round Start', function() {
+// 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
+// });
+// socket.on('Time Over', function() {
+// 	console.log('TIME OVER');
+// 	if(!choice) {
+// 		choice = 'none';
+// 	}
+// 	socket.emit('Choice', {choice: choice});
+// });
+// socket.on('Next Round', function() {
+// 	choice = '';
+// 	socket.emit('ready');
+// });
 
 // hook up socket context to middleware for redux
 
