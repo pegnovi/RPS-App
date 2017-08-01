@@ -15,6 +15,37 @@ const store = createStore(
 );
 console.log('INITIAL APP STATE:', store.getState());
 
+
+import { connect } from './tools/webSocket';
+const socket = connect();
+
+// add socket event handlers here
+
+// hook up socket context to middleware for redux
+
+// Store state
+/*
+{
+	gameState: {
+		state: <string>,
+		players: {
+			opponent: {
+				choice/handsign: <string>
+			},
+			me: {
+				choice/handsign: <string>
+			}
+		}
+	},
+	playerStatus: {
+		wins: <number>,
+		losses: <number>
+	}
+}
+// Conditional component rendering based on game.state
+*/
+
+
 registerServiceWorker();
 
 ReactDOM.render(

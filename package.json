@@ -8,6 +8,9 @@
     "morgan": "^1.8.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-scripts": "1.0.8",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
     "react-redux": "^5.0.5",
     "react-scripts": "1.0.8",
     "redux": "^3.7.2"
