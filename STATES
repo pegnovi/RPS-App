@@ -4,17 +4,16 @@
 {
 	gameState: <string>,
 	players: {
-			opponent: {
-				choice/handsign: <string>
-			},
-			me: {
-				choice/handsign: <string>
-			}
-
-	},
-	playerStatus: {
-		wins: <number>,
-		losses: <number>
+		opponent: {
+			choice/handsign: <string>,
+			wins: <number>,
+			losses: <number>
+		},
+		me: {
+			choice/handsign: <string>,
+			wins: <number>,
+			losses: <number>
+		}
 	}
 }
 ```

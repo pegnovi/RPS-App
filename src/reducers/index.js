@@ -1,12 +1,9 @@
 import {combineReducers} from 'redux';
-import HandsignReducer from './handsignReducer';
-import PlayerstateReducer from './playerstateReducer';
-
+import PlayerStateReducer from './playerStateReducer';
 import GameStateReducer from './gameStateReducer';
 
 const allReducers = combineReducers({
-	handsign: HandsignReducer,
-	playerstate: PlayerstateReducer,
+	playerstate: PlayerStateReducer,
 	gameState: GameStateReducer
 });
 

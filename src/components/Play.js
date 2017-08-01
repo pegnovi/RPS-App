@@ -4,15 +4,30 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import * as gameStateActionCreators from '../actions/gameStateActions';
 
+import HandSignContainer from './HandsignContainer';
+
 class Play extends Component {
 	render() {
 		const gameState = this.props.gameState;
+		let stuffToRender;
+		let inGame = false;
 		if(gameState === 'IN_GAME_CHOOSING') {
-			return (
+			stuffToRender = (
 				<div>
 					Choose buttons
 				</div>
 			);
+			inGame = true;
+		}
+		else {
+			stuffToRender = (<div></div>);
+		}
+
+		if(inGame) {
+			return (<div>
+				{stuffToRender}
+				<HandSignContainer />
+			</div>);
 		}
 		else {
 			return (<div></div>);
