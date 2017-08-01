@@ -11,6 +11,9 @@
     "react-scripts": "1.0.8",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3"
+    "react-redux": "^5.0.5",
+    "react-scripts": "1.0.8",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
