@@ -10,15 +10,16 @@ import Play from './Play';
 // https://github.com/reactjs/redux/issues/419
 class GameContainer extends Component {
 	render(){
+		const gameState = this.props.gameState;
 		return (
 			<div>
-				<Lobby gameState={this.props.gameState}
+				<Lobby state={gameState.state}
 					joinGame={this.props.joinGame}
 					roomComplete={this.props.roomComplete}
 					allReady={this.props.allReady}
 				/>
 
-				<Play gameState={this.props.gameState} />
+				<Play state={gameState.state} />
 
 			</div>
 		);

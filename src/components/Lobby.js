@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 export default class Lobby extends Component {
 	render() {
-		const gameState = this.props.gameState;
+		const gameState = this.props.state;
 		if(gameState === 'LOBBY') {
 			return (
 				<input type="button"

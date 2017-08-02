@@ -10,6 +10,8 @@ const server = app.listen(PORT, () => {
 	console.log(`App listening on port ${PORT}!`);
 });
 
+//const io = new Server().attach(8090);
+const io = require('socket.io')(server);
 var helpers = require('./tools/socketHelpers')(io);
 
 
@@ -51,12 +53,13 @@ function joinGame(socket) {
 	}
 }
 
-//const io = new Server().attach(8090);
-const io = require('socket.io')(server);
+
 io.on('connection', function(socket) {
 	console.log('client connected: ', socket.id);
 
 	console.log('Game Rooms: ', helpers.getGameRooms());
+
+	socket.emit('test');
 
 	socket.on('join game', function() {
 		joinGame(socket);

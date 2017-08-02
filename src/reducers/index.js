@@ -3,7 +3,7 @@ import PlayerStateReducer from './playerStateReducer';
 import GameStateReducer from './gameStateReducer';
 
 const allReducers = combineReducers({
-	playerstate: PlayerStateReducer,
+	playerState: PlayerStateReducer,
 	gameState: GameStateReducer
 });
 

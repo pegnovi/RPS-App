@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
+
+import * as gameStateActionCreators from './actions/gameStateActions';
 
 import allReducers from './reducers';
+import socketActionMiddleware from './middleware/socketActionMiddleware';
 
 import { connect } from './tools/webSocket';
 
-const store = createStore(
+const socket = connect();
+const createStoreWithMiddleware = applyMiddleware(socketActionMiddleware(socket))(createStore);
+
+const store = createStoreWithMiddleware(
 	allReducers,
 	/* FOR USE WITH REDUX-DEV-TOOLS https://github.com/zalmoxisus/redux-devtools-extension#usage */
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -18,8 +24,9 @@ const store = createStore(
 //console.log('INITIAL APP STATE:', store.getState());
 
 
-
-// const socket = connect();
+socket.on('test', function() {
+	//store.dispatch(gameStateActionCreators.roomComplete());
+});
 
 // add socket event handlers here
 // var choice = '';
