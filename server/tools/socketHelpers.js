@@ -146,7 +146,10 @@ class GameState {
 		}
 
 		console.log(this.socketStates);
-
+		return {
+			[socketStates[0].socketId]: results.p1Result,
+			[socketStates[1].socketId]: results.p2Result,
+		};
 	}
 	increaseRound() {
 		this.round = this.round + 1;

@@ -118,7 +118,7 @@ io.on('connection', function(socket) {
 			if(gameState.bothSocketsHaveChoice()) {
 				console.log('YEY');
 
-				gameState.scoreWinner();
+				const results = gameState.scoreWinner();
 
 				// reset choices
 				gameState.setAllSocketStatesVar('choice', '');
@@ -138,6 +138,9 @@ io.on('connection', function(socket) {
 					gameState.setVar('state', 'gameOver');
 
 					const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
+					_.forEach(socketsInRoom, function(socketInRoom) {
+						socketInRoom.emit('Game Results', results[socketInRoom.id]);
+					});
 
 					// Make both sockets leave the room
 					_.forEach(socketsInRoom, function(socketInRoom) {

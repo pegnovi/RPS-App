@@ -34,6 +34,10 @@ socket.on('Start Game', function() {
 	store.dispatch(gameStateActionCreators.allReady());
 });
 
+socket.on('Game Results', function(results) {
+	console.log(results);
+});
+
 // socket.on('Round Start', function() {
 // 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
 // });
