@@ -27,7 +27,7 @@ class GameState {
 	constructor() {
 		this.state = 'neutral';
 		this.round = 0;
-		this.maxRounds = 2;
+		this.maxRounds = 1;
 		this.timeLimit = 3000;
 		this.socketStates = {}; // map of SocketStates
 	}

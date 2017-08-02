@@ -6,6 +6,8 @@ const app = require('./app');
 
 const PORT = 9000;
 
+const uuidv4 = require('uuid/v4');
+
 const server = app.listen(PORT, () => {
 	console.log(`App listening on port ${PORT}!`);
 });
@@ -75,6 +77,7 @@ io.on('connection', function(socket) {
 
 			// If both are ready, start game
 			if(gameState.gameIsReady()) {
+				
 				io.in(roomData.roomName).emit('Start Game');
 
 				// Actually start the game phases & repeat if multiple rounds
@@ -87,11 +90,12 @@ io.on('connection', function(socket) {
 
 					gameState.setVar('state', 'timing');
 
-					setTimeout(function() {
-						console.log('Time Over');
-						gameState.setVar('state', 'timeOver');
-						io.in(roomData.roomName).emit('Time Over');
-					}, gameState.timeLimit);
+					// setTimeout(function() {
+					// 	console.log('Time Over');
+					// 	gameState.setVar('state', 'timeOver');
+					// 	io.in(roomData.roomName).emit('Time Over');
+					// }, gameState.timeLimit);
+					gameState.setVar('state', 'timeOver');
 				}
 				else {
 					// Determine winner and End Game
@@ -102,7 +106,7 @@ io.on('connection', function(socket) {
 		}
 	});
 
-	socket.on('Choice', function(data) {
+	socket.on('choice', function(data) {
 		console.log(data);
 		const roomData = helpers.getSocketRoomData(socket);
 		const gameState = roomData.room.gameState;

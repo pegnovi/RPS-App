@@ -25,24 +25,15 @@ const store = createStoreWithMiddleware(
 
 
 socket.on('test', function() {
-	//store.dispatch(gameStateActionCreators.roomComplete());
+	console.log('test');
+});
+socket.on('Room Complete', function() {
+	store.dispatch(gameStateActionCreators.roomComplete());
+});
+socket.on('Start Game', function() {
+	store.dispatch(gameStateActionCreators.allReady());
 });
 
-// add socket event handlers here
-// var choice = '';
-// $('#joinGame').click(function() {
-// 	socket.emit('join game');
-// });
-// $('#ready').click(function() {
-// 	socket.emit('ready');
-// });
-// socket.on('Room Complete', function() {
-// 	console.log('Room Complete');
-// 	showRPS();
-// });
-// socket.on('Start Game', function() {
-// 	console.log('GAME HAS STARTED!!!')
-// });
 // socket.on('Round Start', function() {
 // 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
 // });

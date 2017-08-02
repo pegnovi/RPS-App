@@ -16,6 +16,7 @@ class GameContainer extends Component {
 				<Lobby state={gameState.state}
 					joinGame={this.props.joinGame}
 					roomComplete={this.props.roomComplete}
+					setReady={this.props.setReady}
 					allReady={this.props.allReady}
 				/>
 

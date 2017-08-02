@@ -13,6 +13,13 @@ export const roomComplete = () => {
 	}
 }
 
+export const setReady = () => {
+	return {
+		type: 'SET_READY',
+		payload: ''
+	}
+}
+
 export const allReady = () => {
 	return {
 		type: 'ALL_READY',

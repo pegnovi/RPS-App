@@ -34,7 +34,7 @@ export default class Lobby extends Component {
 					<input type="button"
 						name="ready"
 						value="ready"
-						onClick={() => console.log('ready')}
+						onClick={() => this.props.setReady()}
 					/>
 					{/* Temporary for testing */}
 					<input type="button"

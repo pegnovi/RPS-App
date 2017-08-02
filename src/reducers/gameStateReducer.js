@@ -17,6 +17,8 @@ export default function(
 		case 'ROOM_COMPLETE':
 			nextState.state = action.payload;
 			return nextState;
+		case 'SET_READY':
+			return nextState;
 		case 'ALL_READY':
 			nextState.state = action.payload;
 			return nextState;
