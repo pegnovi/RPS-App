@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 
+import * as gameAndPlayerStateActionCreators from './actions/gameAndPlayerStateActions';
 import * as gameStateActionCreators from './actions/gameStateActions';
 
 import allReducers from './reducers';
@@ -34,8 +35,8 @@ socket.on('Start Game', function() {
 	store.dispatch(gameStateActionCreators.allReady());
 });
 
-socket.on('Game Results', function(results) {
-	console.log(results);
+socket.on('Game Results', function(result) {
+	store.dispatch(gameAndPlayerStateActionCreators.setMatchResult(result));
 });
 
 // socket.on('Round Start', function() {

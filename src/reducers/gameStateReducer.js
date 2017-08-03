@@ -5,7 +5,8 @@ export default function(
 	state = {
 		state: 'LOBBY',
 		round: 0,
-		maxRounds: 5
+		maxRounds: 5,
+		matchResult: ''
 	},
 	action) {
 
@@ -22,16 +23,18 @@ export default function(
 		case 'ALL_READY':
 			nextState.state = action.payload;
 			return nextState;
-		case 'MATCH_RESULT':
+		case 'SET_MATCH_RESULT':
 			const result = action.payload;
 			if(result !== 'tie') {
 				nextState.round += 1;
 			}
+			nextState.matchResult = action.payload;
 			nextState.state = 'GAME_OVER';
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.state = 'LOBBY';
 			nextState.round = 0;
+			nextState.matchResult = '';
 			return nextState;
 		default:
 			break;

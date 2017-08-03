@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
 
 			// If both are ready, start game
 			if(gameState.gameIsReady()) {
-				
+
 				io.in(roomData.roomName).emit('Start Game');
 
 				// Actually start the game phases & repeat if multiple rounds
@@ -137,8 +137,11 @@ io.on('connection', function(socket) {
 					//end game
 					gameState.setVar('state', 'gameOver');
 
+					console.log('SENDING RESULTS');
 					const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
 					_.forEach(socketsInRoom, function(socketInRoom) {
+						console.log(socketInRoom.id);
+						console.log(results[socketInRoom.id]);
 						socketInRoom.emit('Game Results', results[socketInRoom.id]);
 					});
 

@@ -1,16 +1,14 @@
 //https://github.com/reactjs/redux/issues/601
 export const setMatchResult = (result) => {
-	const type = 'MATCH_RESULT';
 	return {
-		type: type,
+		type: 'SET_MATCH_RESULT',
 		payload: result
 	};
 }
 
 export const exitMatch = () => {
-	const type = 'EXIT_MATCH';
 	return {
-		type: type,
+		type: 'EXIT_MATCH',
 		payload: ''
 	};
 }

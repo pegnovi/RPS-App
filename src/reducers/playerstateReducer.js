@@ -22,7 +22,7 @@ export default function(
 		case 'HANDSIGN_SELECTED':
 			nextState.own.handSign = action.payload;
 			return nextState;
-		case 'MATCH_RESULT':
+		case 'SET_MATCH_RESULT':
 			const result = action.payload;
 			if(result === 'win') {
 				nextState.own.score += 1;

@@ -11,7 +11,8 @@ states:
 	gameState: {
 		state: <string>,
 		round: <number>,
-		maxRounds: <number>
+		maxRounds: <number>,
+		matchResult: <string>
 	},
 	playerState: {
 		opponent: {
