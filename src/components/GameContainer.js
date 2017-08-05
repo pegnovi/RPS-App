@@ -6,6 +6,8 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import Lobby from './Lobby';
 import Play from './Play';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 // Something to consider
 // https://github.com/reactjs/redux/issues/419
 class GameContainer extends Component {
@@ -19,6 +21,8 @@ class GameContainer extends Component {
 					setReady={this.props.setReady}
 					allReady={this.props.allReady}
 				/>
+
+				<RaisedButton label="Default" />
 
 				<Play state={gameState.state} />
 
