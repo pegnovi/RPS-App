@@ -1,20 +1,32 @@
 # state model
 
 ```
-{
-	gameState: <string>,
-	players: {
-			opponent: {
-				choice/handsign: <string>
-			},
-			me: {
-				choice/handsign: <string>
-			}
+states:
+- WAITING_FOR_OPPONENT
+- WAITING_FOR_READY
+- IN_GAME_CHOOSING
 
+
+{
+	gameState: {
+		state: <string>,
+		round: <number>,
+		maxRounds: <number>,
+		matchResult: <string>
 	},
-	playerStatus: {
-		wins: <number>,
-		losses: <number>
+	playerState: {
+		opponent: {
+			choice/handsign: <string>,
+			score: <number>,
+			wins: <number>,
+			losses: <number>
+		},
+		me: {
+			choice/handsign: <string>,
+			score: <number>,
+			wins: <number>,
+			losses: <number>
+		}
 	}
 }
 ```

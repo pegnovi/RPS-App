@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import HandsignButton from './HandsignButton';
 
-import { playHandSign } from '../actions/hangsignActions';
+import { playHandSign } from '../actions/playerStateActions';
 
 const handsigns = ['rock', 'paper', 'scissors', 'rocketlauncher'];
 let count = 0;
@@ -21,11 +21,9 @@ class HandsignContainer extends Component {
 			);
 		});
 
-		return (
-			<div>
-				{elements}
-			</div>
-		);
+		return (<div>
+			{elements}
+		</div>);
 	}
 }
 

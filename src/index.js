@@ -4,22 +4,55 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
+
+import * as gameAndPlayerStateActionCreators from './actions/gameAndPlayerStateActions';
+import * as gameStateActionCreators from './actions/gameStateActions';
 
 import allReducers from './reducers';
+import socketActionMiddleware from './middleware/socketActionMiddleware';
 
-const store = createStore(
+import { connect } from './tools/webSocket';
+
+const socket = connect();
+const createStoreWithMiddleware = applyMiddleware(socketActionMiddleware(socket))(createStore);
+
+const store = createStoreWithMiddleware(
 	allReducers,
 	/* FOR USE WITH REDUX-DEV-TOOLS https://github.com/zalmoxisus/redux-devtools-extension#usage */
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-console.log('INITIAL APP STATE:', store.getState());
+//console.log('INITIAL APP STATE:', store.getState());
 
 
-import { connect } from './tools/webSocket';
-const socket = connect();
+socket.on('test', function() {
+	console.log('test');
+});
+socket.on('Room Complete', function() {
+	store.dispatch(gameStateActionCreators.roomComplete());
+});
+socket.on('Start Game', function() {
+	store.dispatch(gameStateActionCreators.allReady());
+});
 
-// add socket event handlers here
+socket.on('Game Results', function(result) {
+	store.dispatch(gameAndPlayerStateActionCreators.setMatchResult(result));
+});
+
+// socket.on('Round Start', function() {
+// 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
+// });
+// socket.on('Time Over', function() {
+// 	console.log('TIME OVER');
+// 	if(!choice) {
+// 		choice = 'none';
+// 	}
+// 	socket.emit('Choice', {choice: choice});
+// });
+// socket.on('Next Round', function() {
+// 	choice = '';
+// 	socket.emit('ready');
+// });
 
 // hook up socket context to middleware for redux
 

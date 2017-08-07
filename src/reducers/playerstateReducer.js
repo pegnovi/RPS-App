@@ -1,10 +1,40 @@
-// takes in  gamestate actions, reduces them to functions
-export default function(state = 'PLAYER_INIT', action) {
+import { cloneDeep } from 'lodash';
+
+export default function(
+	state = {
+		opponent: {
+			handSign: 'none',
+			score: 0,
+			wins: 0,
+			losses: 0
+		},
+		own: {
+			handSign: 'none',
+			score: 0,
+			wins: 0,
+			losses: 0
+		}
+	},
+	action) {
+
+	const nextState = cloneDeep(state);
 	switch(action.type){
-		case 'PLAYER_LOBBY':
-		case 'PLAYER_WAITING':
-		case 'PLAYER_START_GAME':
-			return action.payload;
+		case 'HANDSIGN_SELECTED':
+			nextState.own.handSign = action.payload;
+			return nextState;
+		case 'SET_MATCH_RESULT':
+			const result = action.payload;
+			if(result === 'win') {
+				nextState.own.score += 1;
+			}
+			else if(result === 'lose') {
+				nextState.opponent.score += 1;
+			}
+			return nextState;
+		case 'EXIT_MATCH':
+			nextState.handSign = 'none';
+			nextState.score = 0;
+			return nextState;
 		default:
 			break;
 	}
