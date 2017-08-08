@@ -6,7 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import Lobby from './Lobby';
 import Play from './Play';
 
-import RaisedButton from 'material-ui/RaisedButton';
+const style = { margin: '10em' }; // simple inline styles for now
 
 // Something to consider
 // https://github.com/reactjs/redux/issues/419
@@ -14,15 +14,13 @@ class GameContainer extends Component {
 	render(){
 		const gameState = this.props.gameState;
 		return (
-			<div>
+			<div style={style}>
 				<Lobby state={gameState.state}
 					joinGame={this.props.joinGame}
 					roomComplete={this.props.roomComplete}
 					setReady={this.props.setReady}
 					allReady={this.props.allReady}
 				/>
-
-				<RaisedButton label="Default" />
 
 				<Play state={gameState.state} />
 

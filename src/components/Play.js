@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { merge } from 'lodash';
 
@@ -27,14 +28,15 @@ class Play extends Component {
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					You !!! {gameState.matchResult.toUpperCase()} !!!
+					You {gameState.matchResult.toUpperCase()} !!!
 					<br/>
 					GAME OVER
-					<input type="button"
-						name="exit"
-						value="exit"
+
+					<RaisedButton
+						label='exit'
 						onClick={() => this.props.exitMatch()}
 					/>
+
 				</div>
 			);
 			inGame = true;

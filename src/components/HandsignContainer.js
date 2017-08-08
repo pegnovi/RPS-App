@@ -5,8 +5,8 @@ import HandsignButton from './HandsignButton';
 
 import { playHandSign } from '../actions/playerStateActions';
 
-const handsigns = ['rock', 'paper', 'scissors', 'rocketlauncher'];
 let count = 0;
+const handsigns = ['rock', 'paper', 'scissors'];
 
 class HandsignContainer extends Component {
 	render(){
