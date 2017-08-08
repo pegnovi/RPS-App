@@ -142,7 +142,12 @@ io.on('connection', function(socket) {
 					_.forEach(socketsInRoom, function(socketInRoom) {
 						console.log(socketInRoom.id);
 						console.log(results[socketInRoom.id]);
-						socketInRoom.emit('Game Results', results[socketInRoom.id]);
+						socketInRoom.emit('Game Results', {
+							own: results[socketInRoom.id],
+							others: _.filter(results, function(result, socketId) {
+								return socketId !== socketInRoom.id;
+							})
+						});
 					});
 
 					// Make both sockets leave the room
