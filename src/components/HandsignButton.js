@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {RaisedButton} from 'material-ui';
+import { RaisedButton } from 'material-ui';
+
+const style = { margin: '0.5em' };
 
 class HandsignButton extends Component {
 
 	render(){
 		return (
-		<div>
-
 			<RaisedButton
+				style={style}
 				label={this.props.handSignType}
 				onClick={() => this.props.onHandsignClick()}
 			/>
-
-		</div>
 		);
 	}
 }
