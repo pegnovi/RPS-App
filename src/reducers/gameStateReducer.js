@@ -24,11 +24,11 @@ export default function(
 			nextState.state = action.payload;
 			return nextState;
 		case 'SET_MATCH_RESULT':
-			const result = action.payload;
-			if(result !== 'tie') {
+			const results = action.payload;
+			if(results.own.result !== 'tie') {
 				nextState.round += 1;
 			}
-			nextState.matchResult = action.payload;
+			nextState.matchResult = results.own.result;
 			nextState.state = 'GAME_OVER';
 			return nextState;
 		case 'EXIT_MATCH':

@@ -131,13 +131,19 @@ class GameState {
 		const p1Result = evaluator[p1Choice][p2Choice];
 
 		return {
-			p1Result: p1Result,
-			p2Result: resultMapReverser[p1Result]
+			p1Result: {
+				result: p1Result,
+				choice: p1Choice
+			},
+			p2Result: {
+				result: resultMapReverser[p1Result],
+				choice: p2Choice
+			}
 		};
 	}
 	scoreWinner() {
 		const socketStates = this.getSocketStatesAsArray();
-		var results = this.evalWinner(socketStates[0].states.choice, socketStates[1].states.choice);
+		const results = this.evalWinner(socketStates[0].states.choice, socketStates[1].states.choice);
 		if(results.p1Result === 'win') {
 			this.socketStates[socketStates[0].socketId].increaseScore();
 		}
@@ -148,7 +154,7 @@ class GameState {
 		console.log(this.socketStates);
 		return {
 			[socketStates[0].socketId]: results.p1Result,
-			[socketStates[1].socketId]: results.p2Result,
+			[socketStates[1].socketId]: results.p2Result
 		};
 	}
 	increaseRound() {

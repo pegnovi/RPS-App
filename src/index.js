@@ -33,8 +33,9 @@ socket.on('Start Game', function() {
 	store.dispatch(gameStateActionCreators.allReady());
 });
 
-socket.on('Game Results', function(result) {
-	store.dispatch(gameAndPlayerStateActionCreators.setMatchResult(result));
+socket.on('Game Results', function(results) {
+	console.log(results);
+	store.dispatch(gameAndPlayerStateActionCreators.setMatchResult(results));
 });
 
 // socket.on('Round Start', function() {
