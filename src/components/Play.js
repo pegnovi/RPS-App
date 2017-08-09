@@ -28,9 +28,9 @@ class Play extends Component {
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					You {gameState.matchResult.toUpperCase()} !!!
-					<br/>
 					GAME OVER
+					<br/>
+					You {gameState.matchResult.toUpperCase()} !!!
 
 					<RaisedButton
 						label='exit'

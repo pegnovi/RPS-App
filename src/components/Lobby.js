@@ -15,7 +15,7 @@ export default class Lobby extends Component {
 		else if(gameState === 'WAITING_FOR_OPPONENT') {
 			return (
 				<div>
-					<p> Waiting... </p>
+					<p> Waiting for an opponent... </p>
 					{/* Temporary for testing */}
 					<input type='button'
 						name='joinOther'
@@ -28,6 +28,7 @@ export default class Lobby extends Component {
 		else if(gameState === 'WAITING_FOR_READY') {
 			return (
 				<div>
+					<p> Opponent found, ready? </p>
 					<RaisedButton
 						label='ready'
 						onClick={() => this.props.setReady()}
