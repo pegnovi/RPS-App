@@ -22,8 +22,6 @@ const store = createStoreWithMiddleware(
 	/* FOR USE WITH REDUX-DEV-TOOLS https://github.com/zalmoxisus/redux-devtools-extension#usage */
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-//console.log('INITIAL APP STATE:', store.getState());
-
 
 socket.on('test', function() {
 	console.log('test');
