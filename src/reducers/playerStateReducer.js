@@ -30,7 +30,7 @@ export default function(
 			else if(results.own.result === 'lose') {
 				nextState.opponent.score += 1;
 			}
-			nextState.opponent.handSign = results.others[0].choice;
+			nextState.opponent.handSign = results.opponent.choice;
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.handSign = 'none';
