@@ -23,13 +23,14 @@ export default function(
 			nextState.own.handSign = action.payload;
 			return nextState;
 		case 'SET_MATCH_RESULT':
-			const result = action.payload;
-			if(result === 'win') {
+			const results = action.payload;
+			if(results.own.result === 'win') {
 				nextState.own.score += 1;
 			}
-			else if(result === 'lose') {
+			else if(results.own.result === 'lose') {
 				nextState.opponent.score += 1;
 			}
+			nextState.opponent.handSign = results.others[0].choice;
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.handSign = 'none';
