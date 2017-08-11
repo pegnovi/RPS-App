@@ -7,15 +7,17 @@ import { playHandSign } from '../actions/playerStateActions';
 
 let count = 0;
 const handsigns = ['rock', 'paper', 'scissors'];
-const style = { display: 'inline' };
+const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o fa-lg'); // maps to font awesome icons
+const style = { display: 'inline-block' };
 
 class HandsignContainer extends Component {
 	render(){
 		// setup elements
-		const elements = handsigns.map((handsign)=>{
+		const elements = handsigns.map((handsign, index)=>{
 			return (
 				<HandsignButton
 					key={count++}
+					iconName={icons[index]}
 					handSignType={handsign}
 					onHandsignClick={() => this.props.playHandSign(handsign)}
 				/>

@@ -23,7 +23,6 @@ class GameContainer extends Component {
 				/>
 
 				<Play state={gameState.state} />
-
 			</div>
 		);
 	}
