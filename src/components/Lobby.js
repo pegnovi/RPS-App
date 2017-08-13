@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { RaisedButton } from 'material-ui';
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default class Lobby extends Component {
 	render() {
@@ -16,6 +17,7 @@ export default class Lobby extends Component {
 			return (
 				<div>
 					<p> Waiting for an opponent... </p>
+					<CircularProgress mode="indeterminate" />
 					{/* Temporary for testing */}
 					<input type='button'
 						name='joinOther'

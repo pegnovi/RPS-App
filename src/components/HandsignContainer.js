@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import HandsignButton from './HandsignButton';
-
 import { playHandSign } from '../actions/playerStateActions';
 
-let count = 0;
 const handsigns = ['rock', 'paper', 'scissors'];
-const style = { display: 'inline' };
+const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o'); //font awesome icon names
+const style = { display: 'inline-block' };
+let count = 0;
 
 class HandsignContainer extends Component {
 	render(){
 		// setup elements
-		const elements = handsigns.map((handsign)=>{
+		const elements = handsigns.map((handsign, index)=>{
 			return (
 				<HandsignButton
 					key={count++}
+					iconName={icons[index]}
 					handSignType={handsign}
 					onHandsignClick={() => this.props.playHandSign(handsign)}
 				/>

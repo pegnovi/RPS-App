@@ -81,9 +81,12 @@ class GameState {
 		});
 	}
 	gameIsReady() {
-		if(_.size(this.socketStates) === 2 &&
-			_.isEmpty(_.filter(this.socketStates, (socketState) => socketState.state !== 'ready'))
-		) {
+		const playersAreInRoom = _.size(this.socketStates) === 2;
+		const playersAreReady = _.isEmpty(
+			_.filter(this.socketStates, (socketState) => socketState.state !== 'ready')
+		);
+
+		if(playersAreInRoom && playersAreReady) {
 			return true;
 		}
 		return false;
