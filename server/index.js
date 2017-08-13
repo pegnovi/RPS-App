@@ -127,6 +127,8 @@ io.on('connection', function(socket) {
 				// increase round count if not tie
 				if(results[_.keys(results)[0]].result !== 'tie') {
 					gameState.increaseRound();
+					var winner = gameState.hasMatchWinner();
+					console.log('WINNER: ', winner);
 				}
 
 				console.log(gameState.getVar('round'));

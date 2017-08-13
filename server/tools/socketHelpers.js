@@ -28,6 +28,7 @@ class GameState {
 		this.state = 'neutral';
 		this.round = 0;
 		this.maxRounds = 5;
+		this.maxScore = 3;
 		this.timeLimit = 3000;
 		this.socketStates = {}; // map of SocketStates
 	}
@@ -93,6 +94,16 @@ class GameState {
 	}
 	hasRoundsLeft() {
 		return this.round < this.maxRounds;
+	}
+	hasMatchWinner() {
+		var self = this;
+		var winner;
+		_.forEach(this.socketStates, function(socketState, socketId) {
+			if(socketState.score >= self.maxScore) {
+				winner = socketId;
+			}
+		});
+		return winner;
 	}
 	evalWinner(p1Choice, p2Choice) {
 
