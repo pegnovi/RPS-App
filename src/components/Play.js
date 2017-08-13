@@ -68,6 +68,12 @@ class Play extends Component {
 					*/}
 
 					<p>Opponent Choice: {playerState.opponent.handSign}</p>
+					<FontAwesome
+						name={'hand-' + playerState.opponent.handSign + '-o'}
+						size='2x'
+						spin
+						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+					/>
 					<p>You have, {0} seconds remaining to choose.</p>
 
 					<p>Your choice:</p>
