@@ -134,6 +134,7 @@ io.on('connection', function(socket) {
 
 				// If any rounds left, show round results (& start next round?)
 				const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
+				// TODO: Should check if someone has maxScore instead
 				if(gameState.hasRoundsLeft()) {
 					gameState.setVar('state', 'neutral');
 					helpers.sendResults('Round Over', socketsInRoom, results);

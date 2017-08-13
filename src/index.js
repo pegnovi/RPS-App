@@ -46,11 +46,6 @@ socket.on('Round Over', function(results) {
 	}, 3000);
 });
 
-socket.on('Next Round', function() {
-	// choice = '';
-	// socket.emit('ready');
-	
-});
 
 // socket.on('Round Start', function() {
 // 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
