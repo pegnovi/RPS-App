@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
+import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 
 const style = { margin: '0.5em' };

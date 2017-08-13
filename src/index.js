@@ -43,10 +43,10 @@ socket.on('Game Results', function(results) {
 // });
 // socket.on('Time Over', function() {
 // 	console.log('TIME OVER');
-// 	if(!choice) {
-// 		choice = 'none';
-// 	}
-// 	socket.emit('Choice', {choice: choice});
+// 	// if(!choice) {
+// 	// 	choice = 'none';
+// 	// }
+// 	// socket.emit('Choice', {choice: choice});
 // });
 // socket.on('Next Round', function() {
 // 	choice = '';

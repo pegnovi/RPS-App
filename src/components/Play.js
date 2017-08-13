@@ -67,8 +67,10 @@ class Play extends Component {
 
 				<br/>
 				<br/>
-				Timer
+				Timer:
 				<br/>
+
+				Your choice:
 				<br/>
 
 				<FontAwesome

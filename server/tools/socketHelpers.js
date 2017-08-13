@@ -83,7 +83,7 @@ class GameState {
 	gameIsReady() {
 		const playersAreInRoom = _.size(this.socketStates) === 2;
 		const playersAreReady = _.isEmpty(
-			_.filter(this.socketStates, (socketState) => socketState.state !== 'ready');
+			_.filter(this.socketStates, (socketState) => socketState.state !== 'ready')
 		);
 
 		if(playersAreInRoom && playersAreReady) {
