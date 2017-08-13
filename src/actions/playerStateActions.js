@@ -15,4 +15,11 @@ export const playHandSign = (state) => {
 	};
 }
 
+export const resetHandSigns = () => {
+	return {
+		type: 'RESET_HAND_SIGNS',
+		payload: 'none'
+	};
+}
+
 

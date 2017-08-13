@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 
+import * as playerStateActionCreators from './actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from './actions/gameAndPlayerStateActions';
 import * as gameStateActionCreators from './actions/gameStateActions';
 
@@ -42,8 +43,10 @@ socket.on('Round Over', function(results) {
 	console.log(results);
 	store.dispatch(gameAndPlayerStateActionCreators.setRoundResult(results));
 	setTimeout(function() {
+		store.dispatch(playerStateActionCreators.resetHandSigns());
 		store.dispatch(gameStateActionCreators.setReady());
-	}, 3000);
+	}, 3000)
+	
 });
 
 

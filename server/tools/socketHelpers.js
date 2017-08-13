@@ -149,9 +149,11 @@ class GameState {
 		const results = this.evalWinner(socketStates[0].states.choice, socketStates[1].states.choice);
 		if(results.p1Result.result === 'win') {
 			this.socketStates[socketStates[0].socketId].increaseScore();
+			results.p1Result.score = this.socketStates[socketStates[0].socketId].getVar('score');
 		}
 		else if(results.p2Result.result === 'win') {
 			this.socketStates[socketStates[1].socketId].increaseScore();
+			results.p1Result.score = this.socketStates[socketStates[1].socketId].getVar('score');
 		}
 
 		console.log(this.socketStates);

@@ -75,6 +75,7 @@ class Play extends Component {
 					<br/>
 					*/}
 
+					<p>Opponent's score: {playerState.opponent.score}</p>
 					<p>Opponent Choice: {playerState.opponent.handSign}</p>
 					<FontAwesome
 						name={'hand-' + playerState.opponent.handSign + '-o'}
@@ -94,6 +95,7 @@ class Play extends Component {
 					<p>{playerState.own.handSign}</p>
 
 					<HandSignContainer />
+					<p>Score: {playerState.own.score}</p>
 
 					<form className='debug-controls'>
 						{/* Temporary for testing */}
