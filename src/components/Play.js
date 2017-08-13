@@ -47,70 +47,60 @@ class Play extends Component {
 		}
 
 		if(inGame) {
-			return (<div>
-				<br/>
-				{stuffToRender}
-				<br/>
+			return (
+				<div>
+					<div>
+						{stuffToRender}
+					</div>
 
-				{/*
-				<br/>
-				Round {gameState.round} of {gameState.maxRounds}
-				<br/>
+					{/*
+					<br/>
+					Round {gameState.round} of {gameState.maxRounds}
+					<br/>
 
-				<br/>
-				Opponent Score: {playerState.opponent.score}
-				*/}
+					<br/>
+					Opponent Score: {playerState.opponent.score}
+					*/}
 
-				<br/>
-				Opponent Choice: {playerState.opponent.handSign}
-				<br/>
+					{/*
+					My Score: {playerState.own.score}
+					<br/>
+					*/}
 
-				<br/>
-				<br/>
-				Timer:
-				<br/>
+					<p>Opponent Choice: {playerState.opponent.handSign}</p>
+					<p>You have, {0} seconds remaining to choose.</p>
 
-				Your choice:
-				<br/>
+					<p>Your choice:</p>
+					<FontAwesome
+						name={'hand-' + playerState.own.handSign + '-o'}
+						size='2x'
+						spin
+						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+					/>
+					<p>{playerState.own.handSign}</p>
 
-				<FontAwesome
-					name={'hand-' + playerState.own.handSign + '-o'}
-					size='2x'
-					spin
-					style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-				/>
+					<HandSignContainer />
 
-				<br/>
-				{playerState.own.handSign}
-				<br/>
-
-				<HandSignContainer />
-				<br/>
-				{/*
-				My Score: {playerState.own.score}
-				<br/>
-				*/}
-				<br/>
-
-				{/* Temporary for testing */}
-				<input type="button"
-					name="evalWinnerWin"
-					value="evalWinnerWin"
-					onClick={() => this.props.setMatchResult('win')}
-				/>
-				<input type="button"
-					name="evalWinnerLose"
-					value="evalWinnerLose"
-					onClick={() => this.props.setMatchResult('lose')}
-				/>
-				<input type="button"
-					name="evalWinnerTie"
-					value="evalWinnerTie"
-					onClick={() => this.props.setMatchResult('tie')}
-				/>
-
-
-			</div>);
+					<form className='debug-controls'>
+						{/* Temporary for testing */}
+						<input type="button"
+							name="evalWinnerWin"
+							value="evalWinnerWin"
+							onClick={() => this.props.setMatchResult('win')}
+						/>
+						<input type="button"
+							name="evalWinnerLose"
+							value="evalWinnerLose"
+							onClick={() => this.props.setMatchResult('lose')}
+						/>
+						<input type="button"
+							name="evalWinnerTie"
+							value="evalWinnerTie"
+							onClick={() => this.props.setMatchResult('tie')}
+						/>
+					</form>
+				</div>
+			);
 		}
 		else {
 			return (<div></div>);
