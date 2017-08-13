@@ -6,6 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
+import FontAwesome from 'react-fontawesome';
 
 import { merge } from 'lodash';
 
@@ -20,7 +21,7 @@ class Play extends Component {
 		if(gameState.state === 'IN_GAME_CHOOSING') {
 			stuffToRender = (
 				<div>
-					Choose buttons
+					Choose your move before the timer runs out!
 				</div>
 			);
 			inGame = true;
@@ -36,9 +37,9 @@ class Play extends Component {
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					GAME OVER
-					<br/>
-					You {gameState.matchResult.toUpperCase()} !!!
+					<p>GAME OVER</p>
+
+					<p>You {gameState.matchResult.toUpperCase()} !!!</p>
 
 					<RaisedButton
 						label='exit'
@@ -54,60 +55,66 @@ class Play extends Component {
 		}
 
 		if(inGame) {
-			return (<div>
-				<br/>
-				{stuffToRender}
-				<br/>
+			return (
+				<div>
+					<div>
+						{stuffToRender}
+					</div>
 
-				{/*
-				<br/>
-				Round {gameState.round} of {gameState.maxRounds}
-				<br/>
+					{/*
+					<br/>
+					Round {gameState.round} of {gameState.maxRounds}
+					<br/>
 
-				<br/>
-				Opponent Score: {playerState.opponent.score}
-				*/}
+					<br/>
+					Opponent Score: {playerState.opponent.score}
+					*/}
 
-				<br/>
-				Opponent Choice: {playerState.opponent.handSign}
-				<br/>
+					{/*
+					My Score: {playerState.own.score}
+					<br/>
+					*/}
 
-				<br/>
-				<br/>
-				Timer
-				<br/>
-				<br/>
+					<p>Opponent Choice: {playerState.opponent.handSign}</p>
+					<FontAwesome
+						name={'hand-' + playerState.opponent.handSign + '-o'}
+						size='2x'
+						spin
+						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+					/>
+					<p>You have, {0} seconds remaining to choose.</p>
 
-				<br/>
-				{playerState.own.handSign}
-				<br/>
-				<HandSignContainer />
-				<br/>
-				{/*
-				My Score: {playerState.own.score}
-				<br/>
-				*/}
-				<br/>
+					<p>Your choice:</p>
+					<FontAwesome
+						name={'hand-' + playerState.own.handSign + '-o'}
+						size='2x'
+						spin
+						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+					/>
+					<p>{playerState.own.handSign}</p>
 
-				{/* Temporary for testing */}
-				<input type="button"
-					name="evalWinnerWin"
-					value="evalWinnerWin"
-					onClick={() => this.props.setMatchResult('win')}
-				/>
-				<input type="button"
-					name="evalWinnerLose"
-					value="evalWinnerLose"
-					onClick={() => this.props.setMatchResult('lose')}
-				/>
-				<input type="button"
-					name="evalWinnerTie"
-					value="evalWinnerTie"
-					onClick={() => this.props.setMatchResult('tie')}
-				/>
+					<HandSignContainer />
 
-
-			</div>);
+					<form className='debug-controls'>
+						{/* Temporary for testing */}
+						<input type="button"
+							name="evalWinnerWin"
+							value="evalWinnerWin"
+							onClick={() => this.props.setMatchResult('win')}
+						/>
+						<input type="button"
+							name="evalWinnerLose"
+							value="evalWinnerLose"
+							onClick={() => this.props.setMatchResult('lose')}
+						/>
+						<input type="button"
+							name="evalWinnerTie"
+							value="evalWinnerTie"
+							onClick={() => this.props.setMatchResult('tie')}
+						/>
+					</form>
+				</div>
+			);
 		}
 		else {
 			return (<div></div>);

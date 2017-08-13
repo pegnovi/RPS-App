@@ -6,7 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import Lobby from './Lobby';
 import Play from './Play';
 
-const style = { margin: '10em' }; // simple inline styles for now
+const style = { margin: '10em' }; // simple inline styles
 
 // Something to consider
 // https://github.com/reactjs/redux/issues/419
@@ -23,7 +23,6 @@ class GameContainer extends Component {
 				/>
 
 				<Play state={gameState.state} />
-
 			</div>
 		);
 	}
