@@ -31,6 +31,17 @@ export default function(
 			nextState.matchResult = results.own.result;
 			nextState.state = 'GAME_OVER';
 			return nextState;
+		case 'SET_ROUND_RESULT':
+			const roundResults = action.payload;
+			if(roundResults.own.result !== 'tie') {
+				nextState.round += 1;
+			}
+			nextState.matchResult = roundResults.own.result;
+			nextState.state = 'ROUND_OVER';
+			return nextState;
+		case 'NEXT_ROUND':
+			nextState.state = 'IN_GAME_CHOOSING';
+			return nextState;
 		case 'EXIT_MATCH':
 			nextState.state = 'LOBBY';
 			nextState.round = 0;

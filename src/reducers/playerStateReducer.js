@@ -23,6 +23,7 @@ export default function(
 			nextState.own.handSign = action.payload;
 			return nextState;
 		case 'SET_MATCH_RESULT':
+			// Match Result should be different from round result
 			const results = action.payload;
 			if(results.own.result === 'win') {
 				nextState.own.score += 1;
@@ -31,6 +32,19 @@ export default function(
 				nextState.opponent.score += 1;
 			}
 			nextState.opponent.handSign = results.opponent.choice;
+			return nextState;
+		case 'SET_ROUND_RESULT':
+			const roundResults = action.payload;
+			if(roundResults.own.result === 'win') {
+				nextState.own.score += 1;
+			}
+			else if(roundResults.own.result === 'lose') {
+				nextState.opponent.score += 1;
+			}
+			return nextState;
+		case 'NEXT_ROUND':
+			nextState.own.handSign = 'none';
+			nextState.opponent.handSign = 'none';
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.handSign = 'none';

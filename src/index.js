@@ -38,6 +38,20 @@ socket.on('Game Results', function(results) {
 	store.dispatch(gameAndPlayerStateActionCreators.setMatchResult(results));
 });
 
+socket.on('Round Over', function(results) {
+	console.log(results);
+	store.dispatch(gameAndPlayerStateActionCreators.setRoundResult(results));
+	setTimeout(function() {
+		store.dispatch(gameStateActionCreators.setReady());
+	}, 3000);
+});
+
+socket.on('Next Round', function() {
+	// choice = '';
+	// socket.emit('ready');
+	
+});
+
 // socket.on('Round Start', function() {
 // 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
 // });

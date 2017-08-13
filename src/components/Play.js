@@ -27,7 +27,9 @@ class Play extends Component {
 		}
 		else if(gameState.state === 'ROUND_OVER') {
 			stuffToRender = (<div>
-				
+				ROUND OVER
+				<br/>
+				You {gameState.matchResult.toUpperCase()} !!!
 			</div>);
 			inGame = true;
 		}

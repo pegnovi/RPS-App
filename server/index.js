@@ -123,49 +123,27 @@ io.on('connection', function(socket) {
 				// reset choices
 				gameState.setAllSocketStatesVar('choice', '');
 
-				// increase round count
-				gameState.increaseRound();
+				// increase round count if not tie
+				if(results[_.keys(results)[0]].result !== 'tie') {
+					gameState.increaseRound();
+				}
+
+				console.log(gameState.getVar('round'));
 
 				// Send results
 
-				// If any rounds left, start next round
+				// If any rounds left, show round results (& start next round?)
+				const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
 				if(gameState.hasRoundsLeft()) {
 					gameState.setVar('state', 'neutral');
-					io.in(roomData.roomName).emit('Next Round');
+					helpers.sendResults('Round Over', socketsInRoom, results);
 				}
 				else {
 					//end game
 					gameState.setVar('state', 'gameOver');
 
-					console.log('SENDING RESULTS');
-					const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
-					if(socketsInRoom)
-
-					if(_.size(socketsInRoom) === 2) {
-						const socket1 = socketsInRoom[0];
-						const socket2 = socketsInRoom[1];
-
-						socket1.emit('Game Results', {
-							own: results[socket1.id],
-							opponent: results[socket2.id]
-						});
-
-						socket2.emit('Game Results', {
-							own: results[socket2.id],
-							opponent: results[socket1.id]
-						});
-					}
-
-					// _.forEach(socketsInRoom, function(socketInRoom) {
-					// 	console.log(socketInRoom.id);
-					// 	console.log(results[socketInRoom.id]);
-					// 	socketInRoom.emit('Game Results', {
-					// 		own: results[socketInRoom.id],
-					// 		others: _.filter(results, function(result, socketId) {
-					// 			return socketId !== socketInRoom.id;
-					// 		})
-					// 	});
-					// });
+					//
+					helpers.sendResults('Game Results', socketsInRoom, results);
 
 					// Make both sockets leave the room
 					_.forEach(socketsInRoom, function(socketInRoom) {
