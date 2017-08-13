@@ -25,6 +25,12 @@ class Play extends Component {
 			);
 			inGame = true;
 		}
+		else if(gameState.state === 'ROUND_OVER') {
+			stuffToRender = (<div>
+				
+			</div>);
+			inGame = true;
+		}
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
