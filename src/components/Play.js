@@ -6,6 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
+import FontAwesome from 'react-fontawesome';
 
 import { merge } from 'lodash';
 
@@ -20,7 +21,7 @@ class Play extends Component {
 		if(gameState.state === 'IN_GAME_CHOOSING') {
 			stuffToRender = (
 				<div>
-					Choose buttons
+					Choose your move before the timer runs out!
 				</div>
 			);
 			inGame = true;
@@ -70,9 +71,17 @@ class Play extends Component {
 				<br/>
 				<br/>
 
+				<FontAwesome
+					name={'hand-' + playerState.own.handSign + '-o'}
+					size='2x'
+					spin
+					style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+				/>
+
 				<br/>
 				{playerState.own.handSign}
 				<br/>
+
 				<HandSignContainer />
 				<br/>
 				{/*

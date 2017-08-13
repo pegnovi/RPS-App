@@ -6,12 +6,11 @@ import { RaisedButton } from 'material-ui';
 const style = { margin: '0.5em' };
 
 class HandsignButton extends Component {
-
 	render(){
 		return (
 			<RaisedButton
 				style={style}
-				label={<FontAwesome name={this.props.iconName} />}
+				label={<FontAwesome name={this.props.iconName} size='lg' />}
 				onClick={() => this.props.onHandsignClick()}
 			/>
 		);

@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import HandsignButton from './HandsignButton';
-
 import { playHandSign } from '../actions/playerStateActions';
 
-let count = 0;
 const handsigns = ['rock', 'paper', 'scissors'];
-const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o fa-lg'); // maps to font awesome icons
+const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o'); //font awesome icon names
 const style = { display: 'inline-block' };
+let count = 0;
 
 class HandsignContainer extends Component {
 	render(){
