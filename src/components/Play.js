@@ -6,11 +6,13 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontAwesome from 'react-fontawesome';
+//import FontAwesome from 'react-fontawesome';
 
 import { merge } from 'lodash';
 
 import HandSignContainer from './HandsignContainer';
+import ChosenHandSignVisual from './ChosenHandSignVisual';
+import ScoreBoardVisual from './ScoreBoardVisual';
 
 class Play extends Component {
 	render() {
@@ -61,41 +63,20 @@ class Play extends Component {
 						{stuffToRender}
 					</div>
 
-					{/*
-					<br/>
-					Round {gameState.round} of {gameState.maxRounds}
-					<br/>
+					<p>Opponent's score: {playerState.opponent.score} / {gameState.maxScore}</p>
+					<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
 
-					<br/>
-					Opponent Score: {playerState.opponent.score}
-					*/}
-
-					{/*
-					My Score: {playerState.own.score}
-					<br/>
-					*/}
-
-					<p>Opponent's score: {playerState.opponent.score}</p>
-					<p>Opponent Choice: {playerState.opponent.handSign}</p>
-					<FontAwesome
-						name={'hand-' + playerState.opponent.handSign + '-o'}
-						size='2x'
-						spin
-						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-					/>
+					{/*https://codepen.io/carsy/pen/VvqJwm*/}
+					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
 					<p>You have, {0} seconds remaining to choose.</p>
 
 					<p>Your choice:</p>
-					<FontAwesome
-						name={'hand-' + playerState.own.handSign + '-o'}
-						size='2x'
-						spin
-						style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-					/>
-					<p>{playerState.own.handSign}</p>
+
+					<ChosenHandSignVisual handSign={playerState.own.handSign} />
 
 					<HandSignContainer />
-					<p>Score: {playerState.own.score}</p>
+					<p>Score: {playerState.own.score} / {gameState.maxScore}</p>
+					<ScoreBoardVisual score={playerState.own.score} maxScore={gameState.maxScore} />
 
 					<form className='debug-controls'>
 						{/* Temporary for testing */}

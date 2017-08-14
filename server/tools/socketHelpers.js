@@ -4,6 +4,12 @@ const uuidv4 = require('uuid/v4');
 // Move this into socket and have ref to sockets in gameState?
 class SocketState {
 	constructor() {
+		// Possible choices
+		// - rock
+		// - paper
+		// - scissors
+		// - '' (client hasn't sent choice)
+		// - none (client sent empty choice)
 		this.choice = '';
 		this.score = 0;
 	}
@@ -101,6 +107,7 @@ class GameState {
 		_.forEach(this.socketStates, function(socketState, socketId) {
 			if(socketState.score >= self.maxScore) {
 				winner = socketId;
+				return false;
 			}
 		});
 		return winner;
@@ -160,12 +167,12 @@ class GameState {
 		const results = this.evalWinner(socketStates[0].states.choice, socketStates[1].states.choice);
 		if(results.p1Result.result === 'win') {
 			this.socketStates[socketStates[0].socketId].increaseScore();
-			results.p1Result.score = this.socketStates[socketStates[0].socketId].getVar('score');
 		}
 		else if(results.p2Result.result === 'win') {
 			this.socketStates[socketStates[1].socketId].increaseScore();
-			results.p1Result.score = this.socketStates[socketStates[1].socketId].getVar('score');
 		}
+		results.p1Result.score = this.socketStates[socketStates[0].socketId].getVar('score');
+		results.p2Result.score = this.socketStates[socketStates[1].socketId].getVar('score');
 
 		console.log(this.socketStates);
 		return {
@@ -267,6 +274,8 @@ module.exports = function(io) {
 
 		sendResults: function(eventType, socketsInRoom, results) {
 			console.log('SENDING RESULTS');
+
+			console.log(results);
 
 			if(_.size(socketsInRoom) === 2) {
 				const socket1 = socketsInRoom[0];

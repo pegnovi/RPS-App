@@ -131,14 +131,14 @@ io.on('connection', function(socket) {
 					console.log('WINNER: ', winner);
 				}
 
-				console.log(gameState.getVar('round'));
+				console.log('ROUND: ', gameState.getVar('round'));
 
 				// Send results
 
-				// If any rounds left, show round results (& start next round?)
+				// If winner exists (for entire match)
 				const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
 				// TODO: Should check if someone has maxScore instead
-				if(gameState.hasRoundsLeft()) {
+				if(!winner) {
 					gameState.setVar('state', 'neutral');
 					helpers.sendResults('Round Over', socketsInRoom, results);
 				}
