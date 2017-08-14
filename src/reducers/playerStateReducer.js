@@ -22,15 +22,23 @@ export default function(
 		case 'HANDSIGN_SELECTED':
 			nextState.own.handSign = action.payload;
 			return nextState;
+		case 'RESET_HAND_SIGNS':
+			console.log(action.payload);
+			nextState.opponent.handSign = action.payload;
+			nextState.own.handSign = action.payload;
+			return nextState;
 		case 'SET_MATCH_RESULT':
+			// Match Result should be different from round result
 			const results = action.payload;
-			if(results.own.result === 'win') {
-				nextState.own.score += 1;
-			}
-			else if(results.own.result === 'lose') {
-				nextState.opponent.score += 1;
-			}
+			nextState.own.score = results.own.score;
+			nextState.opponent.score = results.opponent.score;
 			nextState.opponent.handSign = results.opponent.choice;
+			return nextState;
+		case 'SET_ROUND_RESULT':
+			const roundResults = action.payload;
+			nextState.own.score = roundResults.own.score;
+			nextState.opponent.score = roundResults.opponent.score;
+			nextState.opponent.handSign = roundResults.opponent.choice;
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.handSign = 'none';

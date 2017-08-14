@@ -27,7 +27,8 @@ class GameState {
 	constructor() {
 		this.state = 'neutral';
 		this.round = 0;
-		this.maxRounds = 1;
+		this.maxRounds = 5;
+		this.maxScore = 3;
 		this.timeLimit = 3000;
 		this.socketStates = {}; // map of SocketStates
 	}
@@ -94,6 +95,16 @@ class GameState {
 	hasRoundsLeft() {
 		return this.round < this.maxRounds;
 	}
+	hasMatchWinner() {
+		var self = this;
+		var winner;
+		_.forEach(this.socketStates, function(socketState, socketId) {
+			if(socketState.score >= self.maxScore) {
+				winner = socketId;
+			}
+		});
+		return winner;
+	}
 	evalWinner(p1Choice, p2Choice) {
 
 		console.log(p1Choice, ' vs ', p2Choice);
@@ -147,11 +158,13 @@ class GameState {
 	scoreWinner() {
 		const socketStates = this.getSocketStatesAsArray();
 		const results = this.evalWinner(socketStates[0].states.choice, socketStates[1].states.choice);
-		if(results.p1Result === 'win') {
+		if(results.p1Result.result === 'win') {
 			this.socketStates[socketStates[0].socketId].increaseScore();
+			results.p1Result.score = this.socketStates[socketStates[0].socketId].getVar('score');
 		}
-		else if(results.p2Result === 'win') {
+		else if(results.p2Result.result === 'win') {
 			this.socketStates[socketStates[1].socketId].increaseScore();
+			results.p1Result.score = this.socketStates[socketStates[1].socketId].getVar('score');
 		}
 
 		console.log(this.socketStates);
@@ -250,6 +263,25 @@ module.exports = function(io) {
 			return _.filter(sockets, function(socket) {
 				return _.includes(socketIdsInRoom, socket.id);
 			});
+		},
+
+		sendResults: function(eventType, socketsInRoom, results) {
+			console.log('SENDING RESULTS');
+
+			if(_.size(socketsInRoom) === 2) {
+				const socket1 = socketsInRoom[0];
+				const socket2 = socketsInRoom[1];
+
+				socket1.emit(eventType, {
+					own: results[socket1.id],
+					opponent: results[socket2.id]
+				});
+
+				socket2.emit(eventType, {
+					own: results[socket2.id],
+					opponent: results[socket1.id]
+				});
+			}
 		}
 	}
 };

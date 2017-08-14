@@ -26,6 +26,14 @@ class Play extends Component {
 			);
 			inGame = true;
 		}
+		else if(gameState.state === 'ROUND_OVER') {
+			stuffToRender = (<div>
+				ROUND OVER
+				<br/>
+				You {gameState.matchResult.toUpperCase()} !!!
+			</div>);
+			inGame = true;
+		}
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
@@ -67,6 +75,7 @@ class Play extends Component {
 					<br/>
 					*/}
 
+					<p>Opponent's score: {playerState.opponent.score}</p>
 					<p>Opponent Choice: {playerState.opponent.handSign}</p>
 					<FontAwesome
 						name={'hand-' + playerState.opponent.handSign + '-o'}
@@ -86,6 +95,7 @@ class Play extends Component {
 					<p>{playerState.own.handSign}</p>
 
 					<HandSignContainer />
+					<p>Score: {playerState.own.score}</p>
 
 					<form className='debug-controls'>
 						{/* Temporary for testing */}
