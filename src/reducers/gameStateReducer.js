@@ -5,8 +5,9 @@ export default function(
 	state = {
 		state: 'LOBBY',
 		round: 0,
-		maxRounds: 5,
-		matchResult: ''
+		maxRounds: 3,
+		matchResult: '',
+		maxScore: 3
 	},
 	action) {
 
