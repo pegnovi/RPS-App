@@ -43,6 +43,9 @@ export default function(
 		case 'NEXT_ROUND':
 			nextState.state = 'IN_GAME_CHOOSING';
 			return nextState;
+		case 'OPPONENT_FORFEIT':
+			nextState.state = 'OPPONENT_FORFEIT';
+			return nextState;
 		case 'EXIT_MATCH':
 			nextState.state = 'LOBBY';
 			nextState.round = 0;

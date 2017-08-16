@@ -166,6 +166,21 @@ io.on('connection', function(socket) {
 	});
 	socket.on('disconnecting', function(reason) {
 		console.log('client disconnecting: ', reason);
+
+		console.log('disconnecting client id: ', socket.id);
+		const roomData = helpers.getSocketRoomData(socket);
+		if(roomData && roomData.room) {
+			const gameState = roomData.room.gameState;
+			const socketsInRoom = helpers.getSocketsInRoom(roomData.room);
+			_.forEach(socketsInRoom, function(socketInRoom) {
+				if(socketInRoom.id !== socket.id) {
+					console.log(socketInRoom.id);
+					socketInRoom.emit('Opponent Forfeit');
+					socketInRoom.leave(roomData.roomName);
+				}
+			});
+		}
+
 	});
 	socket.on('disconnect', function(reason) {
 		console.log('client disconnected: ', reason);

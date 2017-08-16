@@ -20,6 +20,13 @@ export const nextRound = (results) => {
 	};
 }
 
+export const opponentForfeit = () => {
+	return {
+		type: 'OPPONENT_FORFEIT',
+		payload: ''
+	};
+}
+
 export const exitMatch = () => {
 	return {
 		type: 'EXIT_MATCH',

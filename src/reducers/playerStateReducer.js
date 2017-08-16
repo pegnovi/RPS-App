@@ -42,7 +42,8 @@ export default function(
 			return nextState;
 		case 'EXIT_MATCH':
 			nextState.handSign = 'none';
-			nextState.score = 0;
+			nextState.own.score = 0;
+			nextState.opponent.score = 0;
 			return nextState;
 		default:
 			break;
