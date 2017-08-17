@@ -67,6 +67,7 @@ io.on('connection', function(socket) {
 		joinGame(socket);
 	});
 	socket.on('ready', function() {
+		console.log('ready: ', socket.id);
 		// Find room this socket is in
 		const roomData = helpers.getSocketRoomData(socket);
 		const gameState = (roomData.room) ? roomData.room.gameState : null;

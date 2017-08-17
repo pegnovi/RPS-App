@@ -9,7 +9,9 @@ export default socket => store => next => action => {
 		socket.emit('join game');
 	}
 	else if(action.type === 'SET_READY') {
-		socket.emit('ready');
+		if(store.getState().gameState.state !== 'OPPONENT_FORFEIT') {
+			socket.emit('ready');
+		}
 	}
 	// playerState
 	else if(action.type === 'HANDSIGN_SELECTED') {
