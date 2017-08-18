@@ -52,6 +52,22 @@ class Play extends Component {
 			);
 			inGame = true;
 		}
+		else if(gameState.state === 'OPPONENT_FORFEIT') {
+			stuffToRender = (
+				<div>
+					<p>Opponent Has Forfeited</p>
+
+					<p>You Win !!!</p>
+
+					<RaisedButton
+						label='exit'
+						onClick={() => this.props.exitMatch()}
+					/>
+
+				</div>
+			);
+			inGame = true;
+		}
 		else {
 			stuffToRender = (<div></div>);
 		}

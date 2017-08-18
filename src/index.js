@@ -49,10 +49,12 @@ socket.on('Round Over', function(results) {
 	
 });
 
+// Opponent might forfeit during 'Round Over' setTimout call so the state will be changed
+socket.on('Opponent Forfeit', function() {
+	console.log('opponent forfeit');
+	store.dispatch(gameAndPlayerStateActionCreators.opponentForfeit());
+});
 
-// socket.on('Round Start', function() {
-// 	console.log('ROUND HAS STARTED! MAKE A CHOICE');
-// });
 // socket.on('Time Over', function() {
 // 	console.log('TIME OVER');
 // 	// if(!choice) {
@@ -66,28 +68,6 @@ socket.on('Round Over', function(results) {
 // });
 
 // hook up socket context to middleware for redux
-
-// Store state
-/*
-{
-	gameState: {
-		state: <string>,
-		players: {
-			opponent: {
-				choice/handsign: <string>
-			},
-			me: {
-				choice/handsign: <string>
-			}
-		}
-	},
-	playerStatus: {
-		wins: <number>,
-		losses: <number>
-	}
-}
-// Conditional component rendering based on game.state
-*/
 
 
 registerServiceWorker();
