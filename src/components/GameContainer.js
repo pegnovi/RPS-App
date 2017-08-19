@@ -15,6 +15,7 @@ class GameContainer extends Component {
 		const gameState = this.props.gameState;
 		return (
 			<div style={style}>
+				Room: {gameState.roomId}
 				<Lobby state={gameState.state}
 					joinGame={this.props.joinGame}
 					roomComplete={this.props.roomComplete}

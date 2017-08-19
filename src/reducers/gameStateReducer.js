@@ -7,14 +7,21 @@ export default function(
 		round: 0,
 		maxRounds: 3,
 		matchResult: '',
-		maxScore: 3
+		maxScore: 3,
+		roomId: ''
 	},
 	action) {
 
 	const nextState = cloneDeep(state);
 	switch(action.type){
 		case 'JOIN_GAME':
-			nextState.state = action.payload;
+			nextState.state = 'WAITING_FOR_OPPONENT';
+			return nextState;
+		case 'CANNOT_JOIN_ROOM':
+			nextState.state = 'LOBBY';
+			return nextState;
+		case 'JOINED_ROOM':
+			nextState.roomId = action.payload;
 			return nextState;
 		case 'ROOM_COMPLETE':
 			nextState.state = action.payload;
@@ -50,6 +57,7 @@ export default function(
 			nextState.state = 'LOBBY';
 			nextState.round = 0;
 			nextState.matchResult = '';
+			nextState.roomId = '';
 			return nextState;
 		default:
 			break;

@@ -17,10 +17,22 @@ const io = require('socket.io')(server);
 var helpers = require('./tools/socketHelpers')(io);
 
 
-function joinRoom(socket) {
-	var roomName = helpers.findVacantRoom();
-	if(!roomName) {
-		roomName = uuidv4();
+function joinRoom(socket, roomId) {
+
+	// find the room
+	var roomName = '';
+	if(roomId) {
+		roomName = helpers.findVacaontRoomWithId(roomId);
+		if(!roomName) {
+			socket.emit('Cannot Join Room');
+			return;
+		}
+	}
+	else {
+		roomName = helpers.findVacantRoom();
+		if(!roomName) {
+			roomName = uuidv4();
+		}
 	}
 
 	// Join Room
@@ -33,20 +45,21 @@ function joinRoom(socket) {
 	gameState.addSocketState(socket.id);
 
 	console.log('roomName: ', roomName);
+	socket.emit('Joined Room', {roomId: roomName});
 	return {
 		roomName,
 		room
 	};
 }
 
-function joinGame(socket) {
+function joinGame(socket, roomId) {
 	// Ensure socket isn't already in another room
 	if(!helpers.socketIsInRoom(socket)) {
 		console.log('joinGame: ', socket.id);
 
-		const roomData = joinRoom(socket);
+		const roomData = joinRoom(socket, roomId);
 
-		if(roomData.room.length === 2) {
+		if(roomData && roomData.room.length === 2) {
 			io.in(roomData.roomName).emit('Room Complete');
 		}
 	}
@@ -63,8 +76,9 @@ io.on('connection', function(socket) {
 
 	socket.emit('test');
 
-	socket.on('join game', function() {
-		joinGame(socket);
+	socket.on('join game', function(data) {
+		console.log('JOIN GAME: ', data);
+		joinGame(socket, data.roomId);
 	});
 	socket.on('ready', function() {
 		console.log('ready: ', socket.id);
