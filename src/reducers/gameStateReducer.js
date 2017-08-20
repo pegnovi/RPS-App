@@ -18,7 +18,7 @@ export default function(
 			nextState.state = 'WAITING_FOR_OPPONENT';
 			return nextState;
 		case 'CANNOT_JOIN_ROOM':
-			nextState.state = 'LOBBY';
+			nextState.state = 'LOBBY_JOIN_ROOM_FAILED';
 			return nextState;
 		case 'JOINED_ROOM':
 			nextState.roomId = action.payload;

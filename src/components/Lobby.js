@@ -16,7 +16,7 @@ export default class Lobby extends Component {
 	}
 	render() {
 		const gameState = this.props.state;
-		if(gameState === 'LOBBY') {
+		if(gameState === 'LOBBY' || gameState === 'LOBBY_JOIN_ROOM_FAILED') {
 			return (
 				<div>
 					<input value={this.state.roomId} onChange={evt => this.updateInputValue(evt)}/>
