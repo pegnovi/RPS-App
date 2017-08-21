@@ -22,7 +22,7 @@ function joinRoom(socket, roomId) {
 	// find the room
 	var roomName = '';
 	if(roomId) {
-		roomName = helpers.findVacaontRoomWithId(roomId);
+		roomName = helpers.findVacantRoomWithId(roomId);
 		if(!roomName) {
 			socket.emit('Cannot Join Room');
 			return;
