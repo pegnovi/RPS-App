@@ -91,13 +91,13 @@ io.on('connection', function(socket) {
 
 					gameState.setVar('state', 'timing');
 
-					// setTimeout(function() {
-					// 	console.log('Time Over');
-					// 	gameState.setVar('state', 'timeOver');
-					// 	io.in(roomData.roomName).emit('Time Over');
-					// }, gameState.timeLimit);
+					setTimeout(function() {
+						console.log('Time Over');
+						gameState.setVar('state', 'timeOver');
+						io.in(roomData.roomName).emit('Time Over');
+					}, gameState.timeLimit);
 
-					gameState.setVar('state', 'timeOver');
+					// gameState.setVar('state', 'timeOver');
 				}
 				else {
 					// Determine winner and End Game

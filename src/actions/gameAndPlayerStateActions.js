@@ -33,3 +33,10 @@ export const exitMatch = () => {
 		payload: ''
 	};
 }
+
+export const resolveMatch = (results) => {
+	return {
+		type: 'RESOLVE_MATCH',
+		payload: results
+	};
+}
