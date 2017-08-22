@@ -61,7 +61,7 @@ socket.on('Time Over', function() {
 		choice = 'none';
 	}
 	store.dispatch(gameAndPlayerStateActions.resolveMatch())
-	socket.emit('Choice', {choice: choice});
+	// socket.emit('Choice', {choice: choice});
 });
 // socket.on('Next Round', function() {
 // 	choice = '';

@@ -17,9 +17,10 @@ export default socket => store => next => action => {
 	else if(action.type === 'HANDSIGN_SELECTED') {
 		socket.emit('choice', {choice: action.payload});
 	}
-	else if(action.type === 'RESOLVE_MATCH') {
-		socket.emit('choice', {choice: action.payload});
-	}
+	// else if(action.type === 'RESOLVE_MATCH') {
+	// 	console.log('action:', action);
+	// 	socket.emit('choice', {choice: action.payload});
+	// }
 
 	return next(action);
 }

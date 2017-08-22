@@ -34,9 +34,3 @@ export const exitMatch = () => {
 	};
 }
 
-export const resolveMatch = (results) => {
-	return {
-		type: 'RESOLVE_MATCH',
-		payload: results
-	};
-}
