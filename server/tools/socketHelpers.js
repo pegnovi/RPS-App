@@ -35,7 +35,7 @@ class GameState {
 		this.round = 0;
 		this.maxRounds = 5;
 		this.maxScore = 3;
-		this.timeLimit = 3000;
+		this.timeLimit = 5000;
 		this.socketStates = {}; // map of SocketStates
 	}
 	getVar(key) {
