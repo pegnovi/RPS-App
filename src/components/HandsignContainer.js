@@ -9,6 +9,8 @@ const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o'); //font awe
 const style = { display: 'inline-block' };
 let count = 0;
 
+
+// need to call a function which waits three seconds and then dispatches an action
 class HandsignContainer extends Component {
 	render(){
 		// setup elements
@@ -18,7 +20,9 @@ class HandsignContainer extends Component {
 					key={count++}
 					iconName={icons[index]}
 					handSignType={handsign}
-					onHandsignClick={() => this.props.playHandSign(handsign)}
+					onHandsignClick={() => {
+						return this.props.playHandSign(handsign)}
+					}
 				/>
 			);
 		});

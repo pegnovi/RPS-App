@@ -14,13 +14,14 @@ export default socket => store => next => action => {
 		}
 	}
 	// playerState
-	else if(action.type === 'HANDSIGN_SELECTED') {
+	// else if(action.type === 'HANDSIGN_SELECTED') {
+	// 	// is this where we wait?
+	// 	// socket.emit('choice', {choice: action.payload})
+	// }
+	else if(action.type === 'RESOLVE_MATCH') {
+		console.log('action:', action);
 		socket.emit('choice', {choice: action.payload});
 	}
-	// else if(action.type === 'RESOLVE_MATCH') {
-	// 	console.log('action:', action);
-	// 	socket.emit('choice', {choice: action.payload});
-	// }
 
 	return next(action);
 }

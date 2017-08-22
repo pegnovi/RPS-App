@@ -34,3 +34,11 @@ export const exitMatch = () => {
 	};
 }
 
+
+export const resolveMatch = () => {
+	return {
+		type: 'RESOLVE_MATCH',
+		payload: ''
+	};
+}
+

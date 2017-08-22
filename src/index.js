@@ -57,10 +57,9 @@ socket.on('Opponent Forfeit', function() {
 
 socket.on('Time Over', function() {
 	console.log('TIME OVER');
-	if(!choice) {
-		choice = 'none';
-	}
-	store.dispatch(gameAndPlayerStateActions.resolveMatch())
+	console.log(store.getState())
+	const handsign = store.getState().playerstate.own.handSign;
+	store.dispatch(gameAndPlayerStateActionCreators.resolveMatch(handsign));
 	// socket.emit('Choice', {choice: choice});
 });
 // socket.on('Next Round', function() {
