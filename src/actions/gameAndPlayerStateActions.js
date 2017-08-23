@@ -35,10 +35,10 @@ export const exitMatch = () => {
 }
 
 
-export const resolveMatch = () => {
+export const resolveMatch = (results) => {
 	return {
 		type: 'RESOLVE_MATCH',
-		payload: ''
+		payload: results
 	};
 }
 
