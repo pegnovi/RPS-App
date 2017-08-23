@@ -6,6 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
+import LinearProgress from 'material-ui/LinearProgress';
 //import FontAwesome from 'react-fontawesome';
 
 import { merge } from 'lodash';
@@ -84,7 +85,18 @@ class Play extends Component {
 
 					{/*https://codepen.io/carsy/pen/VvqJwm*/}
 					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
-					<p>You have, {0} seconds remaining to choose.</p>
+					<p>
+						time seconds remaining to choose:
+					</p>
+					<LinearProgress />
+					<br/>
+				    <LinearProgress
+					  mode="determinate"
+					  value={setTimeout(function(){ return 50 }, 5000)}
+					  style={{
+					    width: 150,
+					  }}
+					/>
 
 					<p>Your choice:</p>
 
