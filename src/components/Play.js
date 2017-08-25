@@ -23,7 +23,11 @@ class Play extends Component {
 		if(gameState.state === 'IN_GAME_CHOOSING') {
 			stuffToRender = (
 				<div>
-					Choose your move before the timer runs out!
+					{/*https://codepen.io/carsy/pen/VvqJwm*/}
+					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
+					<p> Choose before time runs out! </p>
+					{}
+					<GradualLinearProgressBar />
 				</div>
 			);
 			inGame = true;
@@ -81,11 +85,6 @@ class Play extends Component {
 
 					<p>Opponent's score: {playerState.opponent.score} / {gameState.maxScore}</p>
 					<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
-
-					{/*https://codepen.io/carsy/pen/VvqJwm*/}
-					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
-					<p> Choose before time runs out! </p>
-					<GradualLinearProgressBar />
 
 					<p>Your choice:</p>
 

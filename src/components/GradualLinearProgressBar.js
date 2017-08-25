@@ -43,7 +43,7 @@ class GradualLinearProgressBar extends Component {
 // if no props passed use these
 GradualLinearProgressBar.defaultProps = {
 	minTime: 0,
-	maxTime: 5
+	maxTime: 4
 };
 
 // props must be numbers
