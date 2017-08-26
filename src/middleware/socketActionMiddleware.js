@@ -6,7 +6,7 @@ export default socket => store => next => action => {
 
 	// gameState
 	if(action.type === 'JOIN_GAME') {
-		socket.emit('join game');
+		socket.emit('join game', {roomId: action.payload});
 	}
 	else if(action.type === 'SET_READY') {
 		if(store.getState().gameState.state !== 'OPPONENT_FORFEIT') {

@@ -220,6 +220,15 @@ module.exports = function(io) {
 			return gameRooms;
 		},
 
+		findVacantRoomWithId: function(roomId) {
+			const rooms = this.getRooms();
+			const targetRoom = rooms[roomId];
+			if(targetRoom && targetRoom.length < 2) {
+				return roomId;
+			};
+			return '';
+		},
+
 		findVacantRoom: function() {
 			const sockets = this.getSocketIds();
 			const rooms = this.getRooms();

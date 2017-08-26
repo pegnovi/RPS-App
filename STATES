@@ -2,6 +2,7 @@
 
 ```
 states:
+- LOBBY
 - WAITING_FOR_OPPONENT
 - WAITING_FOR_READY
 - IN_GAME_CHOOSING
@@ -24,7 +25,7 @@ states:
 			wins: <number>,
 			losses: <number>
 		},
-		me: {
+		own: {
 			choice/handsign: <string>,
 			score: <number>,
 			wins: <number>,

@@ -27,6 +27,12 @@ const store = createStoreWithMiddleware(
 socket.on('test', function() {
 	console.log('test');
 });
+socket.on('Cannot Join Room', function() {
+	store.dispatch(gameStateActionCreators.cannotJoinRoom());
+});
+socket.on('Joined Room', function(data) {
+	store.dispatch(gameStateActionCreators.joinedRoom(data.roomId));
+});
 socket.on('Room Complete', function() {
 	store.dispatch(gameStateActionCreators.roomComplete());
 });

@@ -3,14 +3,28 @@ import { RaisedButton } from 'material-ui';
 import CircularProgress from 'material-ui/CircularProgress';
 
 export default class Lobby extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			roomId: ''
+		};
+	}
+	updateInputValue(evt) {
+		this.setState({
+			roomId: evt.target.value
+		});
+	}
 	render() {
 		const gameState = this.props.state;
-		if(gameState === 'LOBBY') {
+		if(gameState === 'LOBBY' || gameState === 'LOBBY_JOIN_ROOM_FAILED') {
 			return (
-				<RaisedButton
-					label='join'
-					onClick={() => this.props.joinGame()}
-				/>
+				<div>
+					<input value={this.state.roomId} onChange={evt => this.updateInputValue(evt)}/>
+					<RaisedButton
+						label='join'
+						onClick={() => this.props.joinGame(this.state.roomId)}
+					/>
+				</div>
 			);
 		}
 		else if(gameState === 'WAITING_FOR_OPPONENT') {
