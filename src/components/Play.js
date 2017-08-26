@@ -6,7 +6,7 @@ import * as gameStateActionCreators from '../actions/gameStateActions';
 import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
-//import FontAwesome from 'react-fontawesome';
+import GradualLinearProgressBar from './GradualLinearProgressBar'
 
 import { merge } from 'lodash';
 
@@ -23,7 +23,11 @@ class Play extends Component {
 		if(gameState.state === 'IN_GAME_CHOOSING') {
 			stuffToRender = (
 				<div>
-					Choose your move before the timer runs out!
+					{/*https://codepen.io/carsy/pen/VvqJwm*/}
+					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
+					<p> Choose before time runs out! </p>
+					{}
+					<GradualLinearProgressBar />
 				</div>
 			);
 			inGame = true;
@@ -81,10 +85,6 @@ class Play extends Component {
 
 					<p>Opponent's score: {playerState.opponent.score} / {gameState.maxScore}</p>
 					<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
-
-					{/*https://codepen.io/carsy/pen/VvqJwm*/}
-					{/*https://kimmobrunfeldt.github.io/progressbar.js/*/}
-					<p>You have, {0} seconds remaining to choose.</p>
 
 					<p>Your choice:</p>
 

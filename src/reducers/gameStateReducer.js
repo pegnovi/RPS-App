@@ -51,6 +51,8 @@ export default function(
 			nextState.round = 0;
 			nextState.matchResult = '';
 			return nextState;
+		case 'RESOLVE_MATCH':
+			return nextState;
 		default:
 			break;
 	}

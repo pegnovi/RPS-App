@@ -46,7 +46,7 @@ socket.on('Round Over', function(results) {
 		store.dispatch(playerStateActionCreators.resetHandSigns());
 		store.dispatch(gameStateActionCreators.setReady());
 	}, 3000)
-	
+
 });
 
 // Opponent might forfeit during 'Round Over' setTimout call so the state will be changed
@@ -55,21 +55,18 @@ socket.on('Opponent Forfeit', function() {
 	store.dispatch(gameAndPlayerStateActionCreators.opponentForfeit());
 });
 
-// socket.on('Time Over', function() {
-// 	console.log('TIME OVER');
-// 	// if(!choice) {
-// 	// 	choice = 'none';
-// 	// }
-// 	// socket.emit('Choice', {choice: choice});
-// });
+socket.on('Time Over', function() {
+	console.log('TIME OVER');
+	const handsign = store.getState().playerState.own.handSign;
+	store.dispatch(gameAndPlayerStateActionCreators.resolveMatch(handsign));
+	// socket.emit('Choice', {choice: handsign});
+});
 // socket.on('Next Round', function() {
 // 	choice = '';
 // 	socket.emit('ready');
 // });
 
 // hook up socket context to middleware for redux
-
-
 registerServiceWorker();
 
 ReactDOM.render(

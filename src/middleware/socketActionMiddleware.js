@@ -13,8 +13,7 @@ export default socket => store => next => action => {
 			socket.emit('ready');
 		}
 	}
-	// playerState
-	else if(action.type === 'HANDSIGN_SELECTED') {
+	else if(action.type === 'RESOLVE_MATCH') {
 		socket.emit('choice', {choice: action.payload});
 	}
 
