@@ -14,6 +14,16 @@ import HandSignContainer from './HandsignContainer';
 import ChosenHandSignVisual from './ChosenHandSignVisual';
 import ScoreBoardVisual from './ScoreBoardVisual';
 
+import Paper from 'material-ui/Paper';
+
+const style = {
+	height: 100,
+	width: '100%',
+	//margin: 20,
+	textAlign: 'center',
+	display: 'inline-block',
+};
+
 class Play extends Component {
 	render() {
 		const gameState = this.props.gameState;
@@ -41,8 +51,10 @@ class Play extends Component {
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					<p>GAME OVER</p>
-					<p>You {gameState.matchResult.toUpperCase()} !!!</p>
+					GAME OVER
+					<br/>
+					You {gameState.matchResult.toUpperCase()} !!!
+					<br/>
 					<RaisedButton
 						label='exit'
 						onClick={() => this.props.exitMatch()}
@@ -65,13 +77,12 @@ class Play extends Component {
 
 		return (
 			<div>
-				
 
 				<ScoreBoardVisual score={playerState.opponent.score} maxScore={gameState.maxScore} />
 				<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
 
 				<div>
-					{stuffToRender}
+					<Paper style={style} zDepth={1} children={stuffToRender}/>
 				</div>
 
 				<ChosenHandSignVisual handSign={playerState.own.handSign} />
