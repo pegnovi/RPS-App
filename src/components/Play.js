@@ -14,12 +14,22 @@ import HandSignContainer from './HandsignContainer';
 import ChosenHandSignVisual from './ChosenHandSignVisual';
 import ScoreBoardVisual from './ScoreBoardVisual';
 
+import Paper from 'material-ui/Paper';
+
+const style = {
+	height: 140,
+	width: '80%',
+	//margin: 20,
+	textAlign: 'center',
+	display: 'inline-block'
+};
+
 class Play extends Component {
 	render() {
 		const gameState = this.props.gameState;
 		const playerState = this.props.playerState;
 		let stuffToRender;
-		let inGame = false;
+
 		if(gameState.state === 'IN_GAME_CHOOSING') {
 			stuffToRender = (
 				<div>
@@ -30,94 +40,60 @@ class Play extends Component {
 					<GradualLinearProgressBar />
 				</div>
 			);
-			inGame = true;
 		}
 		else if(gameState.state === 'ROUND_OVER') {
 			stuffToRender = (<div>
-				ROUND OVER
-				<br/>
-				You {gameState.matchResult.toUpperCase()} !!!
+				<p> ROUND OVER </p>
+				<p> You {gameState.matchResult.toUpperCase()} !!! </p>
 			</div>);
-			inGame = true;
 		}
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					<p>GAME OVER</p>
-
-					<p>You {gameState.matchResult.toUpperCase()} !!!</p>
-
+					<p> GAME OVER </p>
+					<p> You {gameState.matchResult.toUpperCase()} !!! </p>
 					<RaisedButton
 						label='exit'
 						onClick={() => this.props.exitMatch()}
 					/>
-
 				</div>
 			);
-			inGame = true;
 		}
 		else if(gameState.state === 'OPPONENT_FORFEIT') {
 			stuffToRender = (
 				<div>
 					<p>Opponent Has Forfeited</p>
-
 					<p>You Win !!!</p>
-
 					<RaisedButton
 						label='exit'
 						onClick={() => this.props.exitMatch()}
 					/>
-
 				</div>
 			);
-			inGame = true;
-		}
-		else {
-			stuffToRender = (<div></div>);
 		}
 
-		if(inGame) {
-			return (
+		return (
+			<div>
+
+				<ScoreBoardVisual score={playerState.opponent.score} maxScore={gameState.maxScore} />
+				<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
+
 				<div>
-					<div>
-						{stuffToRender}
-					</div>
-
-					<p>Opponent's score: {playerState.opponent.score} / {gameState.maxScore}</p>
-					<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
-
-					<p>Your choice:</p>
-
-					<ChosenHandSignVisual handSign={playerState.own.handSign} />
-
-					<HandSignContainer />
-					<p>Score: {playerState.own.score} / {gameState.maxScore}</p>
-					<ScoreBoardVisual score={playerState.own.score} maxScore={gameState.maxScore} />
-
-					<form className='debug-controls'>
-						{/* Temporary for testing */}
-						<input type="button"
-							name="evalWinnerWin"
-							value="evalWinnerWin"
-							onClick={() => this.props.setMatchResult('win')}
-						/>
-						<input type="button"
-							name="evalWinnerLose"
-							value="evalWinnerLose"
-							onClick={() => this.props.setMatchResult('lose')}
-						/>
-						<input type="button"
-							name="evalWinnerTie"
-							value="evalWinnerTie"
-							onClick={() => this.props.setMatchResult('tie')}
-						/>
-					</form>
+					<Paper style={style} zDepth={1} children={
+						<span style={{display: 'inline-block', verticalAlign: 'center'}}>
+							{stuffToRender}
+						</span>
+					}/>
 				</div>
-			);
-		}
-		else {
-			return (<div></div>);
-		}
+
+				<ChosenHandSignVisual handSign={playerState.own.handSign} />
+
+				<HandSignContainer />
+				<ScoreBoardVisual score={playerState.own.score} maxScore={gameState.maxScore} />
+
+			</div>
+		);
+
 
 	}
 }

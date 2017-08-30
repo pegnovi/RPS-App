@@ -21,7 +21,6 @@ export default class ChosenHandSignVisual extends Component {
 						spin
 					/>
 				</span>
-				<p>{this.props.handSign}</p>
 			</div>
 		);
 	}

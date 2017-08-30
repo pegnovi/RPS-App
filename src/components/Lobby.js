@@ -49,12 +49,6 @@ export default class Lobby extends Component {
 						label='ready'
 						onClick={() => this.props.setReady()}
 					/>
-					{/* Temporary for testing */}
-					<input type='button'
-						name='readyOther'
-						value='readyOther'
-						onClick={() => this.props.allReady()}
-					/>
 				</div>
 			);
 		}
