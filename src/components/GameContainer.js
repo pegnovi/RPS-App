@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 
 import Snackbar from 'material-ui/Snackbar';
-import Divider from 'material-ui/Divider';
 
 import * as gameStateActionCreators from '../actions/gameStateActions';
 import Lobby from './Lobby';
@@ -25,8 +24,7 @@ const lobbyStates = [
 class GameContainer extends Component {
 	render(){
 		const gameState = this.props.gameState;
-		console.log(gameState.state);
-		console.log(includes(lobbyStates, gameState.state));
+
 		return (
 			<div style={style}>
 				<Snackbar
@@ -34,13 +32,11 @@ class GameContainer extends Component {
 					message="Cannot Join Room"
 					autoHideDuration={4000}
 				/>
-				<div className="app-header" style={{float: 'left'}}>
-					Room: {gameState.roomId}
-					<br/>
+				<div className="app-header" style={{textAlign: 'left'}}>
+					<p>Room: {gameState.roomId}</p>
 				</div>
-				<br/>
-				<Divider style={{display: 'block'}}/>
-				<br/>
+				<hr/>
+				
 				<div>
 					{includes(lobbyStates, gameState.state) ?
 						<Lobby state={gameState.state}

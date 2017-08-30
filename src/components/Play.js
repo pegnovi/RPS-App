@@ -17,11 +17,11 @@ import ScoreBoardVisual from './ScoreBoardVisual';
 import Paper from 'material-ui/Paper';
 
 const style = {
-	height: 100,
-	width: '100%',
+	height: 140,
+	width: '80%',
 	//margin: 20,
 	textAlign: 'center',
-	display: 'inline-block',
+	display: 'inline-block'
 };
 
 class Play extends Component {
@@ -43,18 +43,15 @@ class Play extends Component {
 		}
 		else if(gameState.state === 'ROUND_OVER') {
 			stuffToRender = (<div>
-				ROUND OVER
-				<br/>
-				You {gameState.matchResult.toUpperCase()} !!!
+				<p> ROUND OVER </p>
+				<p> You {gameState.matchResult.toUpperCase()} !!! </p>
 			</div>);
 		}
 		else if(gameState.state === 'GAME_OVER') {
 			stuffToRender = (
 				<div>
-					GAME OVER
-					<br/>
-					You {gameState.matchResult.toUpperCase()} !!!
-					<br/>
+					<p> GAME OVER </p>
+					<p> You {gameState.matchResult.toUpperCase()} !!! </p>
 					<RaisedButton
 						label='exit'
 						onClick={() => this.props.exitMatch()}
@@ -82,7 +79,11 @@ class Play extends Component {
 				<ChosenHandSignVisual handSign={playerState.opponent.handSign} />
 
 				<div>
-					<Paper style={style} zDepth={1} children={stuffToRender}/>
+					<Paper style={style} zDepth={1} children={
+						<span style={{display: 'inline-block', verticalAlign: 'center'}}>
+							{stuffToRender}
+						</span>
+					}/>
 				</div>
 
 				<ChosenHandSignVisual handSign={playerState.own.handSign} />
