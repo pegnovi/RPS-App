@@ -41,7 +41,8 @@ export default function(
 			nextState.opponent.handSign = roundResults.opponent.choice;
 			return nextState;
 		case 'EXIT_MATCH':
-			nextState.handSign = 'none';
+			nextState.own.handSign = 'none';
+			nextState.opponent.handSign = 'none';
 			nextState.own.score = 0;
 			nextState.opponent.score = 0;
 			return nextState;
