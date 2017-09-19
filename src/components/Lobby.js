@@ -51,21 +51,17 @@ export default class Lobby extends Component {
 		else if(gameState === 'WAITING_FOR_OPPONENT') {
 			return (
 				<div>
-					<p> Waiting for an opponent... </p>
+					<h3> Waiting for an opponent... </h3>
 					<CircularProgress mode="indeterminate" />
-					{/* Temporary for testing */}
-					<input type='button'
-						name='joinOther'
-						value='joinOther'
-						onClick={() => this.props.roomComplete()}
-					/>
 				</div>
 			);
 		}
 		else if(gameState === 'WAITING_FOR_READY') {
 			return (
 				<div>
-					<p> Opponent found, ready? </p>
+					<h3> Opponent found! </h3>
+					<h4> Match will begin when both players are ready. </h4>
+					{/* TODO: Add indicator that button has been pressed */}
 					<RaisedButton
 						label='ready'
 						onClick={() => this.props.setReady()}
