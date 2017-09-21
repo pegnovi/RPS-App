@@ -18,3 +18,12 @@
 .App-intro {
   font-size: large;
 }
+
+.Title-letter {
+	display: inline;
+	font-size: 5em;
+}
+.Title-text {
+	display: inline;
+	font-size: 2em;
+}

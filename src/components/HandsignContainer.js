@@ -6,7 +6,10 @@ import { playHandSign } from '../actions/playerStateActions';
 
 const handsigns = ['rock', 'paper', 'scissors'];
 const icons = handsigns.map((handsign) => 'hand-' + handsign + '-o'); //font awesome icon names
-const style = { display: 'inline-block' };
+const style = { 
+	display: 'inline-block',
+	border: '3px solid #42cef4'
+};
 let count = 0;
 
 
