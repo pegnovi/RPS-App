@@ -56,6 +56,12 @@ socket.on('Round Over', function(results) {
 });
 
 // Opponent might forfeit during 'Round Over' setTimout call so the state will be changed
+// Temporary fix is to not trigger socket emit to server when state is OPPONENT_FORFEIT
+// This only works because SET_READY only triggers a socket emit and does not modify state
+// Need a better solution that isn't tightly coupled
+// Possible solution:
+//  - Get handle of setTimeout call and do clearTimeout(handle)
+//    (would need to store setTimeout handle though)
 socket.on('Opponent Forfeit', function() {
 	console.log('opponent forfeit');
 	store.dispatch(gameAndPlayerStateActionCreators.opponentForfeit());
