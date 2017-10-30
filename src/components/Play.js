@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
-import * as gameStateActionCreators from '../actions/gameStateActions';
-import * as playerStateActionCreators from '../actions/playerStateActions';
 import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerStateActions';
 import RaisedButton from 'material-ui/RaisedButton';
 import GradualLinearProgressBar from './GradualLinearProgressBar'
@@ -106,11 +104,7 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch){
 	return bindActionCreators(
-		merge(
-			gameStateActionCreators,
-			playerStateActionCreators,
-			gameAndPlayerStateActionCreators
-		),
+		gameAndPlayerStateActionCreators,
 		dispatch
 	);
 }
