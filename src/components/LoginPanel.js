@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 import TextField from 'material-ui/TextField';
 
 
@@ -12,9 +12,11 @@ export default class LoginPanel extends Component {
 			/>
 			<TextField 
 				hintText='Password'
-				floatingLabelText="Password"
-				type="password"
+				floatingLabelText='Password'
+				type='password'
 			/>
+			<RaisedButton label={'Register'} />
+			<RaisedButton label={'Login'} />
 		</div>);
 	}
 }
