@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS users;
 	Hash it and store salt later
 */
 CREATE TABLE users(
-	id character varying,
+	id uuid DEFAULT uuid_generate_v4 (),
 	username character varying,
 	password character varying,
 	PRIMARY KEY (id)
