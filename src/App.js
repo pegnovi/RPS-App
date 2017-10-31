@@ -4,17 +4,19 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 import GameContainer from './components/GameContainer';
+import LoginPanel from './components/LoginPanel';
 
 class App extends Component {
 	render() {
 
 		return (
 			<div className="App">
-
 				<MuiThemeProvider>
-					<GameContainer />
+					<div>
+						<LoginPanel/>
+						<GameContainer/>
+					</div>
 				</MuiThemeProvider>
-
 			</div>
 		);
 	}
