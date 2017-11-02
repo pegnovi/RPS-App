@@ -41,8 +41,11 @@ var users = [
 
 var startegy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
 	console.log('payload received', jwtPayload);
+	// ^^ payload will contain id (was hashed into jwt payload when generating token in login route)
+
 	// DB call to check user
 	var user = users[_.findIndex(users, {id: jwtPayload.id})];
+
 	if(user) {
 		next(null, user);
 	}
@@ -62,8 +65,11 @@ module.exports = function(app) {
 			var name = req.body.name;
 			var password = req.body.password;
 		}
+
 		// DB call
 		var user = users[_.findIndex(users, {name, name})];
+
+
 		if(!user) {
 			res.status(401).json({message: 'no such user found'});
 		}
@@ -77,7 +83,7 @@ module.exports = function(app) {
 		else {
 			res.status(401).json({message:"passwords did not match"});
 		}
-		
+
 	});
 
 	app.get('/secret',
@@ -90,7 +96,7 @@ module.exports = function(app) {
 	function db_createOne(table, data) {
 
 		const sortedKeys = Object.keys(data).sort();
-		
+
 		const queryColumnsString = sortedKeys
 		.map((key) => {
 			return changeCase.snakeCase(key);
@@ -99,12 +105,12 @@ module.exports = function(app) {
 
 		const queryValuesString = sortedKeys
 		.map((key) => {
-			return ('${' + key + '}'); 
+			return ('${' + key + '}');
 		})
 		.join(', ');
 
 		return db.one('INSERT INTO ' + table +
-			' (' + queryColumnsString + ') ' + 
+			' (' + queryColumnsString + ') ' +
 			'VALUES (' + queryValuesString + ') RETURNING id',
 			data
 		);
