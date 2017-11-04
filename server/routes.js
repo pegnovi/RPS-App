@@ -14,6 +14,8 @@ var changeCase = require('change-case')
 
 var _ = require('lodash');
 
+const bcrypt = require('bcrypt');
+
 var jwt = require('jsonwebtoken');
 
 var passport = require('passport');
@@ -23,7 +25,8 @@ var JwtStrategy = passportJwt.Strategy;
 var ExtractJwt = passportJwt.ExtractJwt;
 var jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	secretOrKey: 'abc123'
+	// Use diff key and store in env var later
+	secretOrKey: process.env.TOKEN_SECRET_OR_KEY || 'abc123'
 };
 
 var users = [
@@ -60,6 +63,50 @@ module.exports = function(app) {
 
 	app.use(passport.initialize());
 
+	app.post('/register', function(req, res) {
+		if(req.body.name && req.body.password) {
+			var name = req.body.name;
+			var password = req.body.password;
+		}
+
+		// DB call
+		var user = users[_.findIndex(users, {name, name})];
+		db.task(t => {
+			return t.any('SELECT * FROM users WHERE username = ${username}', {username: name})
+			.then((targetUser) => {
+				console.log(targetUser);
+				if(_.isEmpty(targetUser)) {
+					return hashPassword(password, 10)
+					.then((hash) => {
+						console.log('hash', hash);
+						return db_createOne2(
+							t,
+							'users', 
+							{username: name, passwordHash: hash},
+							['id']
+						);
+					});
+				}
+				else {
+					return null;
+				}
+			})
+		})
+		.then((createdUserId) => {
+			console.log(createdUserId);
+			if(createdUserId) {
+				res.send(JSON.stringify({message:'Successfully Registered!'}));
+			}
+			else {
+				res.send(JSON.stringify({message:'User already exists!'}));
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	});
+
 	app.post('/login', function(req, res) {
 		if(req.body.name && req.body.password) {
 			var name = req.body.name;
@@ -92,6 +139,32 @@ module.exports = function(app) {
 			res.json('Success! You can not see this without a token');
 		}
 	);
+
+	function db_createOne2(dbOrTask, table, data, returnColumns) {
+
+		const sortedKeys = Object.keys(data).sort();
+
+		const queryColumnsString = sortedKeys
+		.map((key) => {
+			return changeCase.snakeCase(key);
+		})
+		.join(', ');
+
+		const returningColumnsString = returnColumns.join(', ');
+
+		const queryValuesString = sortedKeys
+		.map((key) => {
+			return ('${' + key + '}');
+		})
+		.join(', ');
+
+		return dbOrTask.one('INSERT INTO ' + table +
+			' (' + queryColumnsString + ') ' +
+			'VALUES (' + queryValuesString + ') ' + 
+			'RETURNING ' + returningColumnsString + ';',
+			data
+		);
+	}
 
 	function db_createOne(table, data) {
 
@@ -138,7 +211,40 @@ module.exports = function(app) {
 		});
 	}
 
-	createOne('users', ['username', 'password']);
+	createOne('users', ['username', 'passwordHash']);
 
 
 };
+
+
+//https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts
+const saltRounds = 10;
+const plaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
+function hashPassword(password, saltRounds) {
+	return bcrypt.hash(password, saltRounds).then(function(hash) {
+		// Store hash in your password DB.
+		return hash;
+	});
+}
+
+// .then(function(hash) {
+// 	return bcrypt.compare(myPlaintextPassword, hash).then(function(res) {
+// 		// res == true
+// 		console.log(res);
+
+// 		return hash;
+// 	});
+// })
+// .then(function(hash) {
+// 	return bcrypt.compare(myPlaintextPassword, hash).then(function(res) {
+// 		// res == false
+// 		console.log(res);
+// 	});
+// })
+// .catch(function(err) {
+// 	console.log(err);
+// });
+
+

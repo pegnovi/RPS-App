@@ -8,6 +8,6 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 	id uuid DEFAULT uuid_generate_v4 (),
 	username character varying,
-	password character varying,
+	password_hash character varying,
 	PRIMARY KEY (id)
 );

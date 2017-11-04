@@ -13,6 +13,40 @@ export default class LoginPanel extends Component {
 		};
 	}
 
+	register() {
+		var registerUrl = "http://localhost:9000/register"
+		var xhr = new XMLHttpRequest();
+		var user = this.state.username;
+		var password = this.state.password;
+
+		console.log(user);
+		console.log(password);
+
+		xhr.open('POST', registerUrl, true);
+		xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+		var tokenElement = document.getElementById('token');
+
+		xhr.addEventListener('load', function() {
+			var responseObject = JSON.parse(this.response);
+			console.log(responseObject);
+			// if (responseObject.token) {
+			// 	// Store in cookie later
+			// 	// https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage
+			// 	tokenElement.innerHTML = responseObject.token;
+			// }
+			// else {
+			// 	tokenElement.innerHTML = "No token received";
+			// }
+		});
+
+		var sendObject = JSON.stringify({name: user, password: password});
+
+		console.log('going to send', sendObject);
+
+		xhr.send(sendObject);
+	}
+
 	// make the request to the login endpoint
 	getToken() {
 		var loginUrl = "http://localhost:9000/login"
@@ -92,6 +126,10 @@ export default class LoginPanel extends Component {
 			/>
 			<RaisedButton
 				label={'Register'}
+				onClick={this.register.bind(this)}
+			/>
+			<RaisedButton
+				label={'Secret'}
 				onClick={this.getSecret.bind(this)}
 			/>
 			<RaisedButton
