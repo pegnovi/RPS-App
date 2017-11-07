@@ -70,11 +70,11 @@ module.exports = function(app) {
 		}
 
 		// DB call
-		var user = users[_.findIndex(users, {name, name})];
 		db.task(t => {
 			return t.any('SELECT * FROM users WHERE username = ${username}', {username: name})
 			.then((targetUser) => {
 				console.log(targetUser);
+				// If no user with same username exists, create the new user
 				if(_.isEmpty(targetUser)) {
 					return hashPassword(password, 10)
 					.then((hash) => {
@@ -114,22 +114,30 @@ module.exports = function(app) {
 		}
 
 		// DB call
-		var user = users[_.findIndex(users, {name, name})];
+		db.one('SELECT * FROM users where username = ${username}', {username: name})
+		.then((targetUser) => {
+			if(targetUser) {
+				console.log(targetUser);
+				return verifyPassword(password, targetUser.password_hash)
+				.then((result) => {
+					if(result) {
+						var payload = {id: targetUser.id};
+						var token = jwt.sign(payload, jwtOptions.secretOrKey);
+						res.json({message: "ok", token: token});
+					}
+					else {
+						res.status(401).json({message: 'login error'});
+					}
+				});
+			}
+			else {
+				res.status(401).json({message: 'login error'});
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 
-
-		if(!user) {
-			res.status(401).json({message: 'no such user found'});
-		}
-
-		if(user.password === req.body.password) {
-			// from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
-			var payload = {id: user.id};
-			var token = jwt.sign(payload, jwtOptions.secretOrKey);
-			res.json({message: "ok", token: token});
-		}
-		else {
-			res.status(401).json({message:"passwords did not match"});
-		}
 
 	});
 
@@ -223,9 +231,15 @@ const plaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 function hashPassword(password, saltRounds) {
-	return bcrypt.hash(password, saltRounds).then(function(hash) {
+	return bcrypt.hash(password, saltRounds).then((hash) => {
 		// Store hash in your password DB.
 		return hash;
+	});
+}
+
+function verifyPassword(password, passwordHash) {
+	return bcrypt.compare(password, passwordHash).then((result) => {
+		return result;
 	});
 }
 
