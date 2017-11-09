@@ -6,6 +6,7 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "change-case": "^3.0.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "jsonwebtoken": "^8.1.0",
     "material-ui": "^0.18.7",

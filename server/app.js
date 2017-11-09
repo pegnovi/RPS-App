@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const cookieParser = require('cookie-parser');
+
 const app = express();
 
 // middleware
@@ -13,10 +15,12 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 
-
 // parse application/x-www-form-urlencoded
 // for easier testing with Postman or plain HTML forms
 //app.use(bodyParser.urlencoded({ extended: true }));
+
+const cookieSecret = process.env.COOKIE_SECRET || 'ZtrongKoockie53kRET';
+app.use(cookieParser(cookieSecret));
 
 // req body middleware
 app.use(bodyParser.json());

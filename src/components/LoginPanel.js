@@ -60,6 +60,8 @@ export default class LoginPanel extends Component {
 		xhr.open('POST', loginUrl, true);
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
+		xhr.withCredentials = true; // for cookie
+
 		var tokenElement = document.getElementById('token');
 
 		xhr.addEventListener('load', function() {
@@ -90,9 +92,12 @@ export default class LoginPanel extends Component {
 		var tokenElement = document.getElementById('token');
 		var resultElement = document.getElementById('result');
 		xhr.open('GET', url, true);
+
+		xhr.withCredentials = true; // for cookie
+
 		console.log('TOKEN');
 		console.log(tokenElement.innerHTML);
-		xhr.setRequestHeader("Authorization", "Bearer " + tokenElement.innerHTML);
+		// xhr.setRequestHeader("Authorization", "Bearer " + tokenElement.innerHTML);
 		xhr.addEventListener('load', function() {
 			console.log(this.response);
 			var responseObject = JSON.parse(this.response);

@@ -23,8 +23,20 @@ var passportJwt = require('passport-jwt');
 
 var JwtStrategy = passportJwt.Strategy;
 var ExtractJwt = passportJwt.ExtractJwt;
+
+var cookieExtractor = function(req) {
+
+	console.log('REQ COOKIES: ', req.cookies);
+	var token = null;
+	if (req && req.cookies)
+	{
+		token = req.cookies['jwt'];
+	}
+	return token;
+};
 var jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+	jwtFromRequest: cookieExtractor,
 	// Use diff key and store in env var later
 	secretOrKey: process.env.TOKEN_SECRET_OR_KEY || 'abc123'
 };
@@ -46,7 +58,7 @@ var startegy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
 	console.log('payload received', jwtPayload);
 	// ^^ payload will contain id (was hashed into jwt payload when generating token in login route)
 
-	// DB call to check user
+	// TODO: DB call to check user
 	var user = users[_.findIndex(users, {id: jwtPayload.id})];
 
 	if(user) {
@@ -123,7 +135,20 @@ module.exports = function(app) {
 					if(result) {
 						var payload = {id: targetUser.id};
 						var token = jwt.sign(payload, jwtOptions.secretOrKey);
-						res.json({message: "ok", token: token});
+						
+						res.cookie('jwt', token
+							/*
+							, {
+							httpOnly: true,
+							sameSite: true,
+							signed: true
+							//secure: true // https only
+						}*/);
+						res.json({
+							message: "ok", 
+							token: token
+						});
+
 					}
 					else {
 						res.status(401).json({message: 'login error'});
