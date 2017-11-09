@@ -16,7 +16,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 // parse application/x-www-form-urlencoded
 // for easier testing with Postman or plain HTML forms
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 // req body middleware
 app.use(bodyParser.json());
