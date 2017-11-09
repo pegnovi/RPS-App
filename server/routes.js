@@ -136,14 +136,12 @@ module.exports = function(app) {
 						var payload = {id: targetUser.id};
 						var token = jwt.sign(payload, jwtOptions.secretOrKey);
 						
-						res.cookie('jwt', token
-							/*
-							, {
+						res.cookie('jwt', token, {
 							httpOnly: true,
-							sameSite: true,
-							signed: true
+							sameSite: true
+							//signed: true
 							//secure: true // https only
-						}*/);
+						});
 						res.json({
 							message: "ok", 
 							token: token
