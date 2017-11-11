@@ -24,19 +24,18 @@ var passportJwt = require('passport-jwt');
 var JwtStrategy = passportJwt.Strategy;
 var ExtractJwt = passportJwt.ExtractJwt;
 
-var cookieExtractor = function(req) {
 
-	console.log('REQ COOKIES: ', req.cookies);
+var jwtInCookieExtractor = function(req) {
 	var token = null;
-	if (req && req.cookies)
+	if (req && req.signedCookies)
 	{
-		token = req.cookies['jwt'];
+		token = req.signedCookies['jwt'];
 	}
 	return token;
 };
 var jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	jwtFromRequest: cookieExtractor,
+	//jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+	jwtFromRequest: jwtInCookieExtractor,
 	// Use diff key and store in env var later
 	secretOrKey: process.env.TOKEN_SECRET_OR_KEY || 'abc123'
 };
@@ -59,14 +58,15 @@ var startegy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
 	// ^^ payload will contain id (was hashed into jwt payload when generating token in login route)
 
 	// TODO: DB call to check user
-	var user = users[_.findIndex(users, {id: jwtPayload.id})];
+	// var user = users[_.findIndex(users, {id: jwtPayload.id})];
 
-	if(user) {
-		next(null, user);
-	}
-	else {
-		next(null, false);
-	}
+	// if(user) {
+	// 	next(null, user);
+	// }
+	// else {
+	// 	next(null, false);
+	// }
+	next(null, true);
 });
 
 passport.use(startegy);
@@ -138,8 +138,8 @@ module.exports = function(app) {
 						
 						res.cookie('jwt', token, {
 							httpOnly: true,
-							sameSite: true
-							//signed: true
+							sameSite: true,
+							signed: true
 							//secure: true // https only
 						});
 						res.json({
