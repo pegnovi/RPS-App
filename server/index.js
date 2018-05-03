@@ -4,7 +4,7 @@ const Server = require('socket.io');
 
 const app = require('./app');
 
-const PORT = 9000;
+const PORT = process.env.PORT || 9000;
 
 const uuidv4 = require('uuid/v4');
 
