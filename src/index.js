@@ -15,7 +15,7 @@ import socketActionMiddleware from './middleware/socketActionMiddleware';
 
 import { connect } from './tools/webSocket';
 
-const socket = connect();
+const socket = connect('https://mighty-journey-83734.herokuapp.com/');
 const createStoreWithMiddleware = applyMiddleware(socketActionMiddleware(socket))(createStore);
 
 const store = createStoreWithMiddleware(
