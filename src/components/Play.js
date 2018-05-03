@@ -6,8 +6,6 @@ import * as gameAndPlayerStateActionCreators from '../actions/gameAndPlayerState
 import RaisedButton from 'material-ui/RaisedButton';
 import GradualLinearProgressBar from './GradualLinearProgressBar'
 
-import { merge } from 'lodash';
-
 import HandSignContainer from './HandsignContainer';
 import ChosenHandSignVisual from './ChosenHandSignVisual';
 import ScoreBoardVisual from './ScoreBoardVisual';
