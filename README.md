@@ -5,7 +5,7 @@ Game mode is a race-to-three match.
 Room creation and joining via room IDs available.
 
 
-Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-ap)
+Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 Main technologies used are the following:
 * [Node.js](https://nodejs.org/en/)
